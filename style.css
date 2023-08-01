@@ -2,6 +2,9 @@
     display: grid;
     justify-content: center;
     align-items: center;
+    background-image: url(images.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 
 }
 
@@ -42,7 +45,7 @@ button {
     align-content: center;
     font-size: 2rem;
     border: none;
-    background-color: rgba(240, 248, 255, 0.801);
+    background-color: rgba(240, 248, 255, 0.776);
     border-radius: 5px;
     width: 700px;
     padding: 10px;
@@ -52,7 +55,7 @@ button {
 }
 
 .output.fullscreen {
-    background-color: rgb(251, 251, 251);
+    /* background-color: rgba(255, 255, 255, 0.841); */
     display: grid;
     justify-content: center;
     align-self: center;
@@ -66,6 +69,7 @@ button {
     z-index: 1;
     padding: 50px;
     font-size: 4rem;
+    color: #000;
     /* Adicione espaço para o botão "Tela Inteira" */
 }
 
@@ -83,4 +87,5 @@ p {
     justify-content: center;
     display: flex;
     font-style: bold;
+
 }
