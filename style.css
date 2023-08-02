@@ -6,6 +6,7 @@
 }
 
 body {
+    font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
     background-image: url(fundo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -19,12 +20,13 @@ h1 {
     align-items: center;
     align-content: center;
     font: 2rem;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #ccc;
+    font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
+    color: #333030;
 }
 
 button {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
+
     background-color: rgba(240, 248, 255, 0.801);
     border: none;
     margin-bottom: 5px;
@@ -36,7 +38,7 @@ button {
 }
 
 div.opt {
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: ; */
     background-color: rgba(240, 248, 255, 0.801);
     border: none;
     margin-bottom: 5px;
@@ -63,6 +65,8 @@ div.opt {
     text-transform: uppercase;
     overflow-y: scroll;
     height: 400px;
+    /* font-family: "Arial, Helvetica, sans-serif"; */
+
 }
 
 .output.fullscreen {
@@ -94,11 +98,10 @@ div.opt {
 } */
 
 p {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
     margin: 10px 0px;
     align-items: center;
     justify-content: center;
     display: flex;
-    font-style: bold;
 
 }
