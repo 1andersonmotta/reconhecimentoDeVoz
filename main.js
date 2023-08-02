@@ -114,16 +114,19 @@ if (typeof SpeechRecognition === "undefined") {
         }
     });
     // Função para aplicar as configurações de tamanho, cor e fonte do texto
-    function applyTextSettings(fontSize, fontColor, fontFamily) {
+    function applyTextSettings(fontSize, fontColor, fontFamily, backgroundColor) {
         transcriptionDiv.style.fontSize = `${fontSize}px`;
         transcriptionDiv.style.color = fontColor;
         transcriptionDiv.style.fontFamily = fontFamily;
+        const mainDiv = document.querySelector(".main");
+        mainDiv.style.backgroundColor = backgroundColor;
     }
 
     // Adicionar evento para aplicar as configurações de texto ao alterar os valores nos inputs/select
     const fontSizeInput = document.getElementById("fontSizeInput");
     const fontColorInput = document.getElementById("fontColorInput");
     const fontFamilySelect = document.getElementById("fontFamilySelect");
+    const backgroundColorInput = document.getElementById("backgroundColorInput");
 
     fontSizeInput.addEventListener("input", () => {
         applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
@@ -139,4 +142,15 @@ if (typeof SpeechRecognition === "undefined") {
     fontFamilySelect.addEventListener("change", () => {
         applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
     });
+
+
+    backgroundColorInput.addEventListener("input", () => {
+        applyBackgroundSettings(backgroundColorInput.value);
+    });
+
+    function applyBackgroundSettings(backgroundColor) {
+        const mainDiv = document.querySelector(".output");
+        mainDiv.style.backgroundColor = backgroundColor;
+    }
+
 }
