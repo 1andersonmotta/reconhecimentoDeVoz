@@ -42,6 +42,7 @@ button {
     justify-content: center;
     align-items: center;
     align-content: center;
+    text-align: center;
     font-size: 2rem;
     border: none;
     background-color: rgba(240, 248, 255, 0.776);
@@ -64,6 +65,7 @@ button {
     align-self: center;
     align-items: center;
     align-content: center;
+    text-align: center;
     position: fixed;
     top: 0;
     left: 0;
