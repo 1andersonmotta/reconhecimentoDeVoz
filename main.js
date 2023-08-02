@@ -113,4 +113,30 @@ if (typeof SpeechRecognition === "undefined") {
             isFullscreen = true; // Entrou em modo tela inteira
         }
     });
+    // Função para aplicar as configurações de tamanho, cor e fonte do texto
+    function applyTextSettings(fontSize, fontColor, fontFamily) {
+        transcriptionDiv.style.fontSize = `${fontSize}px`;
+        transcriptionDiv.style.color = fontColor;
+        transcriptionDiv.style.fontFamily = fontFamily;
+    }
+
+    // Adicionar evento para aplicar as configurações de texto ao alterar os valores nos inputs/select
+    const fontSizeInput = document.getElementById("fontSizeInput");
+    const fontColorInput = document.getElementById("fontColorInput");
+    const fontFamilySelect = document.getElementById("fontFamilySelect");
+
+    fontSizeInput.addEventListener("input", () => {
+        applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
+        if (isFullscreen) {
+            adjustTextSizeInFullscreen();
+        }
+    });
+
+    fontColorInput.addEventListener("input", () => {
+        applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
+    });
+
+    fontFamilySelect.addEventListener("change", () => {
+        applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
+    });
 }
