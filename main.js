@@ -33,39 +33,39 @@ if (typeof SpeechRecognition === "undefined") {
     }, 5000); // Reinicia a gravação a cada 5 segundos
 
 
+    // Remova a função recognition.onend completa
+
+    // Variável para controlar se o usuário parou de falar manualmente
+    let userStoppedSpeaking = false;
+
     // Evento chamado quando a fala é detectada
     recognition.onresult = (event) => {
         let interimTranscript = "";
+        let previousTranscript = finalTranscript; // Armazenar o texto anterior da transcrição
+
         for (let i = event.resultIndex; i < event.results.length; i++) {
             const transcript = event.results[i][0].transcript;
-            if (event.results[i].isFinal) {
-                // Se o resultado for final, adicionar o texto à transcrição final
-                finalTranscript += transcript + " ";
-                interimTranscript = ""; // Limpar o texto intermediário
-            } else {
-                // Se for resultado intermediário, atualizar o texto intermediário
-                interimTranscript = transcript;
-            }
+            // Exibir cada palavra individualmente
+            const words = transcript.split(" ");
+            words.forEach((word) => {
+                if (!event.results[i].isFinal) {
+                    // Se for resultado intermediário, atualizar o texto intermediário
+                    interimTranscript += word + " ";
+                } else {
+                    // Se o resultado for final, adicionar o texto à transcrição final
+                    finalTranscript += word + " ";
+                    previousTranscript = finalTranscript; // Atualizar o texto anterior
+                    interimTranscript = ""; // Limpar o texto intermediário
+                }
+            });
         }
-        // Atualizar a transcrição exibida
-        appendTextWithScroll(finalTranscript + interimTranscript);
+
+        // Atualizar a transcrição exibida com o conteúdo anterior e o novo texto
+        appendTextWithScroll(previousTranscript + interimTranscript);
     };
 
-    // Evento chamado em caso de erro
-    recognition.onerror = (event) => {
-        console.error("Erro no reconhecimento de fala:", event.error);
-    };
 
-    // Evento chamado quando o usuário para de falar
-    recognition.onend = () => {
-        if (isListening) {
-            isListening = false;
-            appendTextWithScroll(finalTranscript);
-            finalTranscript = "";
-        }
-    };
-
-    // Iniciar o reconhecimento de fala ao clicar no botão
+    // Adicione o evento recognition.onend do reconhecimento de fala manual pelo botão
     document.getElementById("startButton").addEventListener("click", () => {
         if (!isListening) {
             finalTranscript = "";
@@ -74,8 +74,16 @@ if (typeof SpeechRecognition === "undefined") {
         } else {
             recognition.stop();
             isListening = false;
+            if (!userStoppedSpeaking) {
+                // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
+                finalTranscript += interimTranscript;
+                appendTextWithScroll(finalTranscript);
+            }
+            // userStoppedSpeaking = false; // Resete a variável para a próxima fala
+            interimTranscript = ""; // Limpar o texto intermediário
         }
     });
+
 
     // Role para a parte inferior inicialmente
     scrollToBottom();
