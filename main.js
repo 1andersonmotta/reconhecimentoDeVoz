@@ -130,9 +130,7 @@ if (typeof SpeechRecognition === "undefined") {
 
     fontSizeInput.addEventListener("input", () => {
         applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
-        if (isFullscreen) {
-            adjustTextSizeInFullscreen();
-        }
+
     });
 
     fontColorInput.addEventListener("input", () => {
