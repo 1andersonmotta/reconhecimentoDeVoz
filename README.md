@@ -1,4 +1,4 @@
-# Reconhecimento de Fala
+# 🦻 Reconhecimento de Fala
 
 ![Caso Pare de funcionar Atualize a página](inclusao.gif)
 
@@ -19,6 +19,12 @@ Abra o Nagevador Aceite o acesso ao microfone que será solicitado pelo navegado
 Se preferir poderá Alterar as configurações de Texto como Tamanho da fonte, cor e estilo. Assim tambem em 
 relação ao cor de fundo que pode ser ajustada.
 Modo de exibição em tela cheia disponível
+
+## 🛠 Ferramentas
+
+- [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+- [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
+- [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 
 ## Contribuição
 
