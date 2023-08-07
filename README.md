@@ -1,6 +1,6 @@
 # Título do Projeto
 
-![GIF do Vídeo](inclusao.mp4)
+![GIF do Vídeo](inclusao.gif)
 
 Descrição breve do projeto ou do vídeo. Inclua uma breve introdução do que o GIF abordará e qual o propósito do projeto, se aplicável.
 
