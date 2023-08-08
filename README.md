@@ -2,7 +2,7 @@
 
 ![Caso Pare de funcionar Atualize a página](inclusao.gif)
 
-Captação de Áudio através de uma Ferramenta dos Navegadores e Transcrição de Forma Dinâmica do Conteúdo Gerado. Possibilidade de Formatação do Texto com Cores, Tamanhos e Fontes, Auxiliando na Visualização em Diversos Contextos.
+Captação de Áudio através de uma Ferramenta dos Navegadores e Transcrição de Forma Dinâmica do Conteúdo Gerado. Possibilidade de Configuração do Texto, Cores, Tamanhos, Fontes e Cor de Fundo, Auxiliando na Visualização em Diversos Contextos.
 
 Aplicação desenvolvida com JavaScript, HTML5 e CSS3.
 
