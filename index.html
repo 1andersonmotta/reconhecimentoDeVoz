@@ -7,8 +7,8 @@
 </head>
 
 <body>
-    <div class="main">
-        <h1>Transcrição de Fala</h1>
+    <h1>Transcrição de Fala</h1>
+    <div class="main" id="main">
         <button id="startButton">Iniciar</button>
         <button id="fullscreenButton">Tela Cheia</button>
         <div class="opt">
@@ -26,7 +26,12 @@
             <label for="backgroundColorInput">Cor de Fundo:</label>
             <input type="color" id="backgroundColorInput" value="#f0f8ff">
         </div>
-        <div class="output" id="output"></div>
+        <div class="output" id="output">
+            <div id="menufull" class="menufull ocultar">
+                <button id="startButtonfullscreen">Iniciar</button>
+                <button id="exitfullscreenButton">Sair Tela Cheia</button>
+            </div>
+        </div>
     </div>
 
     <script src="main.js"></script>

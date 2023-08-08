@@ -2,7 +2,6 @@
     display: grid;
     justify-content: center;
     align-items: center;
-
 }
 
 body {
@@ -26,7 +25,6 @@ h1 {
 
 button {
     font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
-
     background-color: rgba(240, 248, 255, 0.801);
     border: none;
     margin-bottom: 5px;
@@ -37,19 +35,59 @@ button {
 
 }
 
+.menufull {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.menufull button {
+    background-color: #eee9e9c6;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-right: 10px;
+    padding: 0px 10px;
+}
+
+.menufull button:hover {
+    background-color: #000000c6;
+    color: #fff;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-right: 10px;
+    padding: 0px 10px;
+}
+
+.ocultar {
+    display: none;
+}
+
 div.opt {
+    display: flex;
+    justify-content: space-around;
     background-color: rgba(240, 248, 255, 0.801);
     border: none;
     margin-bottom: 5px;
     border-radius: 5px;
-    width: initial;
+    width: auto;
     font-size: 1rem;
     color: black;
     padding: 5px;
-
 }
 
 .output {
+    position: relative;
     display: grid;
     justify-content: center;
     align-items: center;
@@ -57,27 +95,22 @@ div.opt {
     text-align: center;
     font-size: 50px;
     border: none;
-    background-color: #f0f8ffc6;
+    background-color: #f0f8ff;
     border-radius: 5px;
-    width: 826px;
+    width: 850px;
     padding: 10px;
     text-transform: uppercase;
     overflow-y: scroll;
-    height: 400px;
+    height: 75vh;
 }
 
 .output.fullscreen {
-    display: grid;
-    justify-content: center;
-    align-self: center;
-    align-items: center;
-    align-content: center;
     text-align: center;
-    position: fixed;
-    top: 0;
+    position: relative;
+    top: 20px;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 1;
     padding: 50px;
     font-size: 4rem;
@@ -90,5 +123,4 @@ p {
     align-items: center;
     justify-content: center;
     display: flex;
-
 }

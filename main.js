@@ -11,10 +11,12 @@ if (typeof SpeechRecognition === "undefined") {
     let isFullscreen = false; // Variável para controlar o estado de tela inteira
 
     const transcriptionDiv = document.getElementById('output');
-
+    const play = document.getElementById('play');
+    const h1 = document.createElement('p');
     // Função para adicionar texto à div com scroll para baixo
     function appendTextWithScroll(text) {
-        transcriptionDiv.textContent = text;
+        h1.textContent = text;
+        transcriptionDiv.insertBefore(h1, play);
         if (!isFullscreen) { // Rolagem somente quando não estiver em tela inteira
             scrollToBottom();
         } else {
@@ -27,13 +29,7 @@ if (typeof SpeechRecognition === "undefined") {
     function scrollToBottom() {
         transcriptionDiv.scrollTop = transcriptionDiv.scrollHeight;
     }
-    // Use a API Keep-Alive para evitar suspensão de áudio
-    const keepAliveInterval = setInterval(() => {
-        navigator.mediaDevices.getUserMedia({ audio: true });
-    }, 5000); // Reinicia a gravação a cada 5 segundos
 
-
-    // Remova a função recognition.onend completa
 
     // Variável para controlar se o usuário parou de falar manualmente
     let userStoppedSpeaking = false;
@@ -84,18 +80,53 @@ if (typeof SpeechRecognition === "undefined") {
         }
     });
 
+    // Adicione o evento recognition.onend do reconhecimento de fala manual pelo botão no fullScreen
+    document.getElementById("startButtonfullscreen").addEventListener("click", () => {
+        if (!isListening) {
+            finalTranscript = "";
+            recognition.start();
+            isListening = true;
+        } else {
+            recognition.stop();
+            isListening = false;
+            if (!userStoppedSpeaking) {
+                // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
+                finalTranscript += interimTranscript;
+                appendTextWithScroll(finalTranscript);
+            }
+            // userStoppedSpeaking = false; // Resete a variável para a próxima fala
+            interimTranscript = ""; // Limpar o texto intermediário
+        }
+    });
+
 
     // Role para a parte inferior inicialmente
     scrollToBottom();
 
     // Adicionar evento ao botão "Tela Inteira"
     const fullscreenButton = document.getElementById("fullscreenButton");
+    const exitfullscreenButton = document.getElementById("exitfullscreenButton");
     const outputDiv = document.getElementById("output");
+    const menufull = document.querySelector("#menufull")
 
     fullscreenButton.addEventListener("click", () => {
         if (outputDiv.classList.contains("fullscreen")) {
             document.exitFullscreen();
+            menufull.classList.add("ocultar")
         } else {
+            menufull.classList.remove("ocultar")
+
+            outputDiv.requestFullscreen().catch((err) => {
+                console.error(`Erro ao entrar no modo de tela inteira: ${err.message}`);
+            });
+        }
+    });
+    exitfullscreenButton.addEventListener("click", () => {
+        if (outputDiv.classList.contains("fullscreen")) {
+            document.exitFullscreen();
+            menufull.classList.add("ocultar")
+        } else {
+            menufull.classList.remove("ocultar")
             outputDiv.requestFullscreen().catch((err) => {
                 console.error(`Erro ao entrar no modo de tela inteira: ${err.message}`);
             });
@@ -105,6 +136,9 @@ if (typeof SpeechRecognition === "undefined") {
     // Adicionar evento para sair do modo de tela inteira quando o usuário pressionar a tecla Esc
     document.addEventListener("fullscreenchange", () => {
         if (!document.fullscreenElement) {
+            // play.classList.add("ocultar")
+            menufull.classList.add("ocultar")
+            // play.style.display = "none"
             outputDiv.classList.remove("fullscreen");
             isFullscreen = false; // Saiu do modo tela inteira
             scrollToBottom(); // Reajusta a rolagem para garantir que fique na parte de baixo
@@ -115,9 +149,9 @@ if (typeof SpeechRecognition === "undefined") {
     });
     // Função para aplicar as configurações de tamanho, cor e fonte do texto
     function applyTextSettings(fontSize, fontColor, fontFamily, backgroundColor) {
-        transcriptionDiv.style.fontSize = `${fontSize}px`;
-        transcriptionDiv.style.color = fontColor;
-        transcriptionDiv.style.fontFamily = fontFamily;
+        h1.style.fontSize = `${fontSize}px`;
+        h1.style.color = fontColor;
+        h1.style.fontFamily = fontFamily;
         const mainDiv = document.querySelector(".main");
         mainDiv.style.backgroundColor = backgroundColor;
     }
