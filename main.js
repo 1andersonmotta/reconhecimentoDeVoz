@@ -115,12 +115,15 @@ if (typeof SpeechRecognition === "undefined") {
             menufull.classList.add("ocultar")
         } else {
             menufull.classList.remove("ocultar")
-
+            setTimeout(() => {
+                menufull.classList.add("ocultar")
+            }, 5000)
             outputDiv.requestFullscreen().catch((err) => {
                 console.error(`Erro ao entrar no modo de tela inteira: ${err.message}`);
             });
         }
     });
+
     exitfullscreenButton.addEventListener("click", () => {
         if (outputDiv.classList.contains("fullscreen")) {
             document.exitFullscreen();
@@ -136,18 +139,16 @@ if (typeof SpeechRecognition === "undefined") {
     // Adicionar evento para sair do modo de tela inteira quando o usuário pressionar a tecla Esc
     document.addEventListener("fullscreenchange", () => {
         if (!document.fullscreenElement) {
-            // play.classList.add("ocultar")
             menufull.classList.add("ocultar")
-            // play.style.display = "none"
             outputDiv.classList.remove("fullscreen");
-            isFullscreen = false; // Saiu do modo tela inteira
-            scrollToBottom(); // Reajusta a rolagem para garantir que fique na parte de baixo
+            isFullscreen = false;
+            scrollToBottom();
         } else {
             outputDiv.classList.add("fullscreen");
-            isFullscreen = true; // Entrou em modo tela inteira
+            isFullscreen = true;
         }
     });
-    // Função para aplicar as configurações de tamanho, cor e fonte do texto
+
     function applyTextSettings(fontSize, fontColor, fontFamily, backgroundColor) {
         h1.style.fontSize = `${fontSize}px`;
         h1.style.color = fontColor;
@@ -156,7 +157,6 @@ if (typeof SpeechRecognition === "undefined") {
         mainDiv.style.backgroundColor = backgroundColor;
     }
 
-    // Adicionar evento para aplicar as configurações de texto ao alterar os valores nos inputs/select
     const fontSizeInput = document.getElementById("fontSizeInput");
     const fontColorInput = document.getElementById("fontColorInput");
     const fontFamilySelect = document.getElementById("fontFamilySelect");
@@ -175,7 +175,6 @@ if (typeof SpeechRecognition === "undefined") {
         applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
     });
 
-
     backgroundColorInput.addEventListener("input", () => {
         applyBackgroundSettings(backgroundColorInput.value);
     });
@@ -184,5 +183,26 @@ if (typeof SpeechRecognition === "undefined") {
         const mainDiv = document.querySelector(".output");
         mainDiv.style.backgroundColor = backgroundColor;
     }
+
+    let timerId;
+    const handleMouseMove = (evt) => {
+        clearTimeout(timerId);
+
+        if (!outputDiv.classList.contains("fullscreen")) {
+            menufull.classList.add("ocultar");
+        } else {
+            menufull.classList.remove("ocultar");
+            menufull.style.cursor = "pointer";
+        }
+
+        timerId = setTimeout(() => {
+            menufull.classList.add("ocultar");
+            menufull.style.cursor = "none";
+            outputDiv.addEventListener("mousemove", handleMouseMove);
+        }, 5000);
+    };
+
+    outputDiv.addEventListener("mousemove", handleMouseMove);
+
 
 }
