@@ -7,10 +7,17 @@
 </head>
 
 <body>
-    <h1>Transcrição de Fala</h1>
+    <div id="top">
+        <h1>Transcrição de Fala</h1>
+    </div>
+
     <div class="main" id="main">
-        <button id="startButton">Iniciar</button>
-        <button id="fullscreenButton">Tela Cheia</button>
+
+        <div class="head">
+            <button id="startButton" title="Iniciar ou Parar Transcrição">Iniciar <img id="mic" src="images/micoff.svg"
+                    title="Parado" alt=""> </button>
+            <button id="fullscreenButton" title="Colocar em Tela Cheia">Tela Cheia</button>
+        </div>
         <div class="opt">
             <label for="fontSizeInput">Tamanho do Texto:</label>
             <input type="number" id="fontSizeInput" value="50">
@@ -28,8 +35,9 @@
         </div>
         <div class="output" id="output">
             <div id="menufull" class="menufull ocultar">
-                <button id="startButtonfullscreen">Iniciar</button>
-                <button id="exitfullscreenButton">Sair Tela Cheia</button>
+                <button id="startButtonfullscreen" title="Iniciar ou Parar Transcrição">Iniciar</button>
+                <img id="micFull" src="images/micoff.svg" title="Parado" alt="">
+                <button id="exitfullscreenButton" title="Sair da Tela Cheia">Sair Tela Cheia</button>
             </div>
         </div>
     </div>

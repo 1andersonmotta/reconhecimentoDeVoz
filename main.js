@@ -60,16 +60,27 @@ if (typeof SpeechRecognition === "undefined") {
         appendTextWithScroll(previousTranscript + interimTranscript);
     };
 
-
+    const mic = document.getElementById("mic")
+    const micFull = document.getElementById("micFull")
     // Adicione o evento recognition.onend do reconhecimento de fala manual pelo botão
     document.getElementById("startButton").addEventListener("click", () => {
         if (!isListening) {
             finalTranscript = "";
             recognition.start();
             isListening = true;
+            mic.setAttribute("src", "images/micon.svg")
+            micFull.setAttribute("src", "images/micon.svg")
+            mic.setAttribute("title", "Ouvindo..")
+            micFull.setAttribute("title", "Ouvindo..")
+
         } else {
             recognition.stop();
             isListening = false;
+            mic.setAttribute("src", "images/micoff.svg")
+            micFull.setAttribute("src", "images/micoff.svg")
+            mic.setAttribute("title", "Parado")
+            micFull.setAttribute("title", "Parado")
+
             if (!userStoppedSpeaking) {
                 // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
                 finalTranscript += interimTranscript;
@@ -80,15 +91,34 @@ if (typeof SpeechRecognition === "undefined") {
         }
     });
 
+    // const startButton = document.getElementById("startButtonfullscreen");
+
+    // startButton.addEventListener("mousedown", () => {
+    //     startButton.style.backgroundColor = "#0d0";
+    // });
+
+    // startButton.addEventListener("mouseup", () => {
+    //     startButton.style.backgroundColor = "";
+    // });
+
     // Adicione o evento recognition.onend do reconhecimento de fala manual pelo botão no fullScreen
-    document.getElementById("startButtonfullscreen").addEventListener("click", () => {
+    document.getElementById("startButtonfullscreen").addEventListener("click", (evt) => {
         if (!isListening) {
             finalTranscript = "";
             recognition.start();
             isListening = true;
+            mic.setAttribute("src", "images/micon.svg")
+            micFull.setAttribute("src", "images/micon.svg")
+            mic.setAttribute("title", "Ouvindo..")
+            micFull.setAttribute("title", "Ouvindo..")
+
         } else {
             recognition.stop();
             isListening = false;
+            mic.setAttribute("src", "images/micoff.svg")
+            mic.setAttribute("title", "Parado")
+            micFull.setAttribute("src", "images/micoff.svg")
+            micFull.setAttribute("title", "Parado")
             if (!userStoppedSpeaking) {
                 // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
                 finalTranscript += interimTranscript;
