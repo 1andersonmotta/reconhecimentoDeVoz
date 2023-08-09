@@ -6,7 +6,7 @@
 
 body {
     font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
-    background-image: url(fundo.jpg);
+    background-image: url(images/fundo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -23,6 +23,19 @@ h1 {
     color: #333030;
 }
 
+img {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    /* margin-right: 10px; */
+    padding: 0px 10px;
+    size-adjust: auto;
+    width: fit-content;
+    height: fit-content;
+
+}
+
 button {
     font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
     background-color: rgba(240, 248, 255, 0.801);
@@ -30,7 +43,7 @@ button {
     margin-bottom: 5px;
     border-radius: 5px;
     width: inherit;
-    font-size: 1rem;
+    font-size: 2rem;
     color: black;
 
 }
@@ -50,23 +63,40 @@ button {
 
 .menufull button {
     background-color: #eee9e9c6;
+    border: 1px solid black;
     text-align: center;
     justify-content: center;
     align-items: center;
     align-content: center;
     margin-right: 10px;
     padding: 0px 10px;
+    font-size: large;
+
+}
+
+.menufull img {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-right: 10px;
+    padding: 0px 10px;
+
 }
 
 .menufull button:hover {
     background-color: #000000c6;
+    border: 1px solid white;
     color: #fff;
     text-align: center;
     justify-content: center;
     align-items: center;
     align-content: center;
+    width: 100%;
     margin-right: 10px;
     padding: 0px 10px;
+    cursor: pointer;
+    font-size: large;
 }
 
 .ocultar {
@@ -123,4 +153,23 @@ p {
     align-items: center;
     justify-content: center;
     display: flex;
+}
+
+#top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+}
+
+.head button {
+    width: 430px;
+    /* border: 1px solid rgb(0, 255, 21); */
 }
