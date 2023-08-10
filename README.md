@@ -11,9 +11,9 @@ Aplicação desenvolvida com JavaScript, HTML5 e CSS3.
 
 ## Pré-requisitos
 
-Internet para acesso do link: "link não gerado V1"
+Internet para acesso do link: "https://transcricaodefala.netlify.app/"
 Microfone para captação do Áudio
-Para teste local utilize a extensão LiveServer : ritwickdey.LiveServer
+Para teste local clone o projeto e utilize a extensão LiveServer : ritwickdey.LiveServer
 
 
 ## Uso
