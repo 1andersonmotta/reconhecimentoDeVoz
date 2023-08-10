@@ -91,18 +91,62 @@ if (typeof SpeechRecognition === "undefined") {
         }
     });
 
-    // const startButton = document.getElementById("startButtonfullscreen");
 
-    // startButton.addEventListener("mousedown", () => {
-    //     startButton.style.backgroundColor = "#0d0";
-    // });
-
-    // startButton.addEventListener("mouseup", () => {
-    //     startButton.style.backgroundColor = "";
-    // });
 
     // Adicione o evento recognition.onend do reconhecimento de fala manual pelo botão no fullScreen
     document.getElementById("startButtonfullscreen").addEventListener("click", (evt) => {
+        if (!isListening) {
+            finalTranscript = "";
+            recognition.start();
+            isListening = true;
+            mic.setAttribute("src", "images/micon.svg")
+            micFull.setAttribute("src", "images/micon.svg")
+            mic.setAttribute("title", "Ouvindo..")
+            micFull.setAttribute("title", "Ouvindo..")
+
+        } else {
+            recognition.stop();
+            isListening = false;
+            mic.setAttribute("src", "images/micoff.svg")
+            mic.setAttribute("title", "Parado")
+            micFull.setAttribute("src", "images/micoff.svg")
+            micFull.setAttribute("title", "Parado")
+            if (!userStoppedSpeaking) {
+                // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
+                finalTranscript += interimTranscript;
+                appendTextWithScroll(finalTranscript);
+            }
+            // userStoppedSpeaking = false; // Resete a variável para a próxima fala
+            interimTranscript = ""; // Limpar o texto intermediário
+        }
+    });
+    document.getElementById("micFull").addEventListener("click", (evt) => {
+        if (!isListening) {
+            finalTranscript = "";
+            recognition.start();
+            isListening = true;
+            mic.setAttribute("src", "images/micon.svg")
+            micFull.setAttribute("src", "images/micon.svg")
+            mic.setAttribute("title", "Ouvindo..")
+            micFull.setAttribute("title", "Ouvindo..")
+
+        } else {
+            recognition.stop();
+            isListening = false;
+            mic.setAttribute("src", "images/micoff.svg")
+            mic.setAttribute("title", "Parado")
+            micFull.setAttribute("src", "images/micoff.svg")
+            micFull.setAttribute("title", "Parado")
+            if (!userStoppedSpeaking) {
+                // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
+                finalTranscript += interimTranscript;
+                appendTextWithScroll(finalTranscript);
+            }
+            // userStoppedSpeaking = false; // Resete a variável para a próxima fala
+            interimTranscript = ""; // Limpar o texto intermediário
+        }
+    });
+    document.getElementById("mic").addEventListener("click", (evt) => {
         if (!isListening) {
             finalTranscript = "";
             recognition.start();
@@ -147,7 +191,7 @@ if (typeof SpeechRecognition === "undefined") {
             menufull.classList.remove("ocultar")
             setTimeout(() => {
                 menufull.classList.add("ocultar")
-            }, 5000)
+            }, 55000)
             outputDiv.requestFullscreen().catch((err) => {
                 console.error(`Erro ao entrar no modo de tela inteira: ${err.message}`);
             });
@@ -210,6 +254,33 @@ if (typeof SpeechRecognition === "undefined") {
     });
 
     function applyBackgroundSettings(backgroundColor) {
+        const mainDiv = document.querySelector(".output");
+        mainDiv.style.backgroundColor = backgroundColor;
+    }
+
+    const fontSizeInputFull = document.getElementById("fontSizeInputFull");
+    const fontColorInputFull = document.getElementById("fontColorInputFull");
+    const fontFamilySelectFull = document.getElementById("fontFamilySelectFull");
+    const backgroundColorInputFull = document.getElementById("backgroundColorInputFull");
+
+    fontSizeInputFull.addEventListener("input", () => {
+        applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
+
+    });
+
+    fontColorInputFull.addEventListener("input", () => {
+        applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
+    });
+
+    fontFamilySelectFull.addEventListener("change", () => {
+        applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
+    });
+
+    backgroundColorInputFull.addEventListener("input", () => {
+        applyBackgroundSettingsFull(backgroundColorInputFull.value);
+    });
+
+    function applyBackgroundSettingsFull(backgroundColor) {
         const mainDiv = document.querySelector(".output");
         mainDiv.style.backgroundColor = backgroundColor;
     }

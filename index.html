@@ -14,8 +14,8 @@
     <div class="main" id="main">
 
         <div class="head">
-            <button id="startButton" title="Iniciar ou Parar Transcrição">Iniciar <img id="mic" src="images/micoff.svg"
-                    title="Parado" alt=""> </button>
+            <button id="startButton" title="Iniciar ou Parar Transcrição">Iniciar </button>
+            <img id="mic" src="images/micoff.svg" title="Parado" alt="">
             <button id="fullscreenButton" title="Colocar em Tela Cheia">Tela Cheia</button>
         </div>
         <div class="opt">
@@ -35,9 +35,26 @@
         </div>
         <div class="output" id="output">
             <div id="menufull" class="menufull ocultar">
-                <button id="startButtonfullscreen" title="Iniciar ou Parar Transcrição">Iniciar</button>
-                <img id="micFull" src="images/micoff.svg" title="Parado" alt="">
-                <button id="exitfullscreenButton" title="Sair da Tela Cheia">Sair Tela Cheia</button>
+                <div class="opt ocultar">
+                    <label for="fontSizeInput">Tamanho do Texto:</label>
+                    <input type="number" id="fontSizeInputFull" value="50">
+                    <label for="fontColorInput">Cor do Texto:</label>
+                    <input type="color" id="fontColorInputFull" value="#000000">
+                    <label for="fontFamilySelect">Fonte do Texto:</label>
+                    <select id="fontFamilySelectFull">
+                        <option value="Arial, Helvetica, sans-serif">Arial</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="Impact, Charcoal, sans-serif">Impact</option>
+                        <option value="Verdana, Geneva, sans-serif">Verdana</option>
+                    </select>
+                    <label for="backgroundColorInput">Cor de Fundo:</label>
+                    <input type="color" id="backgroundColorInputFull" value="#f0f8ff">
+                </div>
+                <div class="btn">
+                    <button id="startButtonfullscreen" title="Iniciar ou Parar Transcrição">INICIAR</button>
+                    <img id="micFull" src="images/micoff.svg" title="Parado" alt="">
+                    <button id="exitfullscreenButton" title="Sair da Tela Cheia">SAIR TELA CHEIA</button>
+                </div>
             </div>
         </div>
     </div>

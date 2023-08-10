@@ -28,28 +28,25 @@ img {
     justify-content: center;
     align-items: center;
     align-content: center;
-    /* margin-right: 10px; */
     padding: 0px 10px;
     size-adjust: auto;
     width: fit-content;
     height: fit-content;
-
 }
 
 button {
     font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
-    background-color: rgba(240, 248, 255, 0.801);
+    background-color: rgba(178, 183, 188, 0.801);
     border: none;
     margin-bottom: 5px;
-    border-radius: 5px;
+    border-radius: 8px;
     width: inherit;
-    font-size: 2rem;
-    color: black;
-
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 .menufull {
-    display: flex;
+    display: table-column;
     position: fixed;
     top: 0;
     left: 0;
@@ -62,16 +59,27 @@ button {
 }
 
 .menufull button {
-    background-color: #eee9e9c6;
-    border: 1px solid black;
+    background-color: rgba(178, 183, 188, 0.801);
     text-align: center;
     justify-content: center;
     align-items: center;
     align-content: center;
     margin-right: 10px;
-    padding: 0px 10px;
+    padding: 3px 10px;
     font-size: large;
+    font-weight: 500;
+}
 
+.menufull .opt {
+    background-color: rgba(178, 183, 188, 0.801);
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    margin-right: 10px;
+    padding: 3px 10px;
+    font-size: large;
+    font-weight: 500;
 }
 
 .menufull img {
@@ -81,13 +89,13 @@ button {
     align-content: center;
     margin-right: 10px;
     padding: 0px 10px;
-
+    border-radius: 50%;
+    background-color: rgb(10, 10, 10);
 }
 
 .menufull button:hover {
-    background-color: #000000c6;
-    border: 1px solid white;
-    color: #fff;
+    background-color: black;
+    color: white;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -97,6 +105,27 @@ button {
     padding: 0px 10px;
     cursor: pointer;
     font-size: large;
+    font-weight: 500;
+    box-shadow: 1px 1px 1px whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke;
+}
+
+.menufull .opt:hover {
+    background-color: black;
+    color: white;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: large;
+    font-weight: 500;
+    box-shadow: 1px 1px 1px whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke;
+}
+
+.btn {
+    display: flex;
+    width: 100%;
 }
 
 .ocultar {
@@ -106,19 +135,42 @@ button {
 div.opt {
     display: flex;
     justify-content: space-around;
-    background-color: rgba(240, 248, 255, 0.801);
+    background-color: rgba(178, 183, 188, 0.801);
     border: none;
     margin-bottom: 5px;
-    border-radius: 5px;
+    border-radius: 8px;
     width: auto;
     font-size: 1rem;
     color: black;
     padding: 5px;
+    font-weight: 500;
+}
+
+div.optFull {
+    justify-content: space-around;
+    background-color: rgba(240, 248, 255, 0.801);
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: black;
+    padding: 5px;
+    display: flex;
+    position: fixed;
+    top: 45px;
+    left: 0;
+    padding: 10px;
+    z-index: 100;
+    background-color: #eee9e9c6;
+    border: 1px solid black;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
 }
 
 .output {
     position: relative;
-    display: grid;
+    display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -126,8 +178,8 @@ div.opt {
     font-size: 50px;
     border: none;
     background-color: #f0f8ff;
-    border-radius: 5px;
-    width: 850px;
+    border-radius: 8px;
+    width: 900px;
     padding: 10px;
     text-transform: uppercase;
     overflow-y: scroll;
@@ -171,5 +223,13 @@ p {
 
 .head button {
     width: 430px;
-    /* border: 1px solid rgb(0, 255, 21); */
+}
+
+input {
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+select#fontFamilySelectFull {
+    border-radius: 8px;
 }
