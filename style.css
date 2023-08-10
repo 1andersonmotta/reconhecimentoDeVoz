@@ -21,6 +21,8 @@ h1 {
     font: 2rem;
     font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
     color: #333030;
+    text-shadow: 1px 1px 1px whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke;
+
 }
 
 img {
@@ -88,9 +90,11 @@ button {
     align-items: center;
     align-content: center;
     margin-right: 10px;
-    padding: 0px 10px;
-    border-radius: 50%;
+    /* padding: 0px 10px; */
+    border-radius: 8px;
     background-color: rgb(10, 10, 10);
+    scale: 0.8;
+    margin-top: -5px;
 }
 
 .menufull button:hover {
@@ -226,10 +230,17 @@ p {
 }
 
 input {
-    border: 1px solid black;
+    border: none;
     border-radius: 8px;
+    padding: 3px;
 }
 
 select#fontFamilySelectFull {
+    border-radius: 8px;
+    padding: 3px;
+
+}
+
+select#fontFamilySelect {
     border-radius: 8px;
 }

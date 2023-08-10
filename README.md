@@ -1,6 +1,9 @@
 # 🦻 Reconhecimento de Fala
 
-![Caso Pare de funcionar Atualize a página](inclusao.gif)
+![Caso Pare de funcionar Atualize a página](images/inclusao.gif)
+
+## v2
+![Caso Pare de funcionar Atualize a página](images/test1.gif)
 
 Captação de Áudio através de uma Ferramenta dos Navegadores e Transcrição de Forma Dinâmica do Conteúdo Gerado. Possibilidade de Configuração do Texto, Cores, Tamanhos, Fontes e Cor de Fundo, Auxiliando na Visualização em Diversos Contextos.
 
