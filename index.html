@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <div id="top">
+    <div id="top" class="top">
         <h1>Transcrição de Fala</h1>
     </div>
 
@@ -55,8 +55,20 @@
                     <img id="micFull" src="images/micoff.svg" title="Parado" alt="">
                     <button id="exitfullscreenButton" title="Sair da Tela Cheia">SAIR TELA CHEIA</button>
                 </div>
+
+                <details class="detailsfull">
+                    <summary>Observações</summary>
+                    <p class="pfull">Quando uma pausa na fala é grande, a aplicação para. É necessário parar e
+                        iniciar novamente.
+                    </p>
+                </details>
+
             </div>
         </div>
+        <details id="details">
+            <summary>Observações</summary>
+            <p>Quando uma pausa na fala é grande, a aplicação para. É necessário parar e iniciar novamente.</p>
+        </details>
     </div>
 
     <script src="main.js"></script>

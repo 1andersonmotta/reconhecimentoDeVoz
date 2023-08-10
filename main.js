@@ -305,5 +305,4 @@ if (typeof SpeechRecognition === "undefined") {
 
     outputDiv.addEventListener("mousemove", handleMouseMove);
 
-
 }
