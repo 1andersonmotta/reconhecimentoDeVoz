@@ -288,6 +288,10 @@ details p {
         align-items: center;
     }
 
+    .main {
+        display: contents;
+    }
+
     h1 {
         text-align: center;
     }
