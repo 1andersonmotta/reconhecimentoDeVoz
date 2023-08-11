@@ -204,11 +204,58 @@ if (typeof SpeechRecognition === "undefined") {
             menufull.classList.add("ocultar")
         } else {
             menufull.classList.remove("ocultar")
-            outputDiv.requestFullscreen().catch((err) => {
-                console.error(`Erro ao entrar no modo de tela inteira: ${err.message}`);
-            });
+
+            if (outputDiv.requestFullscreen) {
+                outputDiv.requestFullscreen();
+            } else if (outputDiv.mozRequestFullScreen) {
+                outputDiv.mozRequestFullScreen();
+            } else if (outputDiv.webkitRequestFullscreen) {
+                outputDiv.webkitRequestFullscreen();
+            } else if (outputDiv.msRequestFullscreen) {
+                outputDiv.msRequestFullscreen();
+            }
+
+            // outputDiv.requestFullscreen().catch((err) => {
+            //     console.error(`Erro ao entrar no modo de tela inteira: ${err.message}`);
+            // });
         }
     });
+
+    //     // Função para ativar o modo de tela cheia
+    // function openFullscreen(element) {
+    //     if (element.requestFullscreen) {
+    //         element.requestFullscreen();
+    //     } else if (element.mozRequestFullScreen) {
+    //         element.mozRequestFullScreen();
+    //     } else if (element.webkitRequestFullscreen) {
+    //         element.webkitRequestFullscreen();
+    //     } else if (element.msRequestFullscreen) {
+    //         element.msRequestFullscreen();
+    //     }
+    // }
+
+    // // Função para sair do modo de tela cheia
+    // function exitFullscreen() {
+    //     if (document.exitFullscreen) {
+    //         document.exitFullscreen();
+    //     } else if (document.mozCancelFullScreen) {
+    //         document.mozCancelFullScreen();
+    //     } else if (document.webkitExitFullscreen) {
+    //         document.webkitExitFullscreen();
+    //     } else if (document.msExitFullscreen) {
+    //         document.msExitFullscreen();
+    //     }
+    // }
+
+    // Adicione essas funções aos botões correspondentes no seu HTML
+    document.getElementById("fullscreenButton").addEventListener("click", function () {
+        openFullscreen(document.documentElement); // Coloque o elemento desejado aqui
+    });
+
+    document.getElementById("exitfullscreenButton").addEventListener("click", function () {
+        exitFullscreen();
+    });
+
 
     // Adicionar evento para sair do modo de tela inteira quando o usuário pressionar a tecla Esc
     document.addEventListener("fullscreenchange", () => {
