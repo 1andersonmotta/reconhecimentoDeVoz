@@ -39,6 +39,10 @@
                 align-items: center;
             }
 
+            .fullscreenButton {
+                display: none;
+            }
+
         }
     </style>
 </head>
@@ -54,7 +58,7 @@
         <div class="head">
             <button id="startButton" title="Iniciar ou Parar Transcrição">INICIAR </button>
             <img id="mic" src="images/micoff.svg" title="Parado" alt="">
-            <button id="fullscreenButton" title="Colocar em Tela Cheia">TELA CHEIA</button>
+            <button id="fullscreenButton" class="fullscreenButton" title="Colocar em Tela Cheia">TELA CHEIA</button>
         </div>
         <div class="opt">
             <label for="fontSizeInput">TAMANHO DO TEXTO:</label>
