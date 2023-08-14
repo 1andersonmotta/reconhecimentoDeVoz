@@ -45,6 +45,43 @@
                 display: none;
             }
 
+            .detailsfull {
+                text-align: left;
+                display: flex;
+                justify-content: left !important;
+                color: black;
+                font-size: 0.8rem;
+                margin-left: 0px;
+                width: fit-content;
+                padding: 2px 8px 4px;
+                border-radius: 8px;
+                background-color: rgba(178, 183, 188, 0.801);
+                font-weight: 500;
+            }
+
+            .pfull {
+                color: black;
+                display: flex;
+                justify-content: left !important;
+                top: -10px;
+                font-size: 1rem;
+            }
+
+            .details {
+                display: flex;
+                justify-content: left;
+                color: white;
+                position: relative;
+            }
+
+            .pmain {
+                color: white;
+                display: flex;
+                justify-content: left;
+                position: relative;
+                top: -10px;
+            }
+
         }
     </style>
 </head>
@@ -100,39 +137,19 @@
                     <button id="exitfullscreenButton" title="Sair da Tela Cheia">SAIR TELA CHEIA</button>
                 </div>
 
-                <details class="detailsfull" style="text-align: left;
-                display: flex;
-                justify-content: left !important;
-                color: black;
-                font-size: 0.8rem;
-                margin-left: 0px;
-                width: fit-content;
-                padding: 2px 8px 4px;
-                border-radius: 8px;
-                background-color: rgba(178, 183, 188, 0.801);
-                font-weight: 500;">
+                <details class="detailsfull">
                     <summary>Observações</summary>
-                    <p class="pfull" style="color: black;
-                    display: flex;
-                    justify-content: left !important;
-                    top: -10px;
-                    font-size: 1rem;">Quando uma pausa na fala é grande, a aplicação para. É necessário parar e
+                    <p class="pfull">Quando uma pausa na fala é grande, a aplicação para. É necessário parar e
                         iniciar novamente.
                     </p>
                 </details>
 
             </div>
         </div>
-        <details id="details" style="display: flex;
-        justify-content: left;
-        color: white;
-        position: relative;">
+        <details id="details" class="details">
             <summary>Observações</summary>
-            <p style="color: white;
-            display: flex;
-            justify-content: left;
-            position: relative;
-            top: -10px;">Quando uma pausa na fala é grande, a aplicação para. É necessário parar e iniciar novamente.
+            <p class="pmain">Quando uma pausa na fala é grande, a aplicação para. É necessário parar e iniciar
+                novamente.
             </p>
         </details>
     </div>
