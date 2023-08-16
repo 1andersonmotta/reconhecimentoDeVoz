@@ -12,7 +12,7 @@ Aplicação desenvolvida com JavaScript, HTML5 e CSS3.
 ## Pré-requisitos
 
 Internet para acesso do link: "https://vozemletras.netlify.app/"
-Microfone para captação do Áudio
+Microfone para captação do Áudio  
 Para teste local clone o projeto e utilize a extensão LiveServer : ritwickdey.LiveServer
 
 
