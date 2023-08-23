@@ -281,8 +281,10 @@ details p {
     color: white;
     display: flex;
     justify-content: left;
-    position: relative;
+    position: unset;
     top: -10px;
+    font-size: 1.3rem;
+    width: 850px;
 
 }
 
@@ -306,6 +308,7 @@ details p {
     justify-content: left !important;
     top: -10px;
     font-size: 1.3rem;
+    width: 120%;
 }
 
 @media screen and (max-width: 768px) {
