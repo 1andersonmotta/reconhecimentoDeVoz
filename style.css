@@ -101,11 +101,14 @@ button {
     align-items: center;
     align-content: center;
     margin-right: 10px;
-    /* padding: 0px 10px; */
     border-radius: 8px;
     background-color: rgb(10, 10, 10);
-    scale: 0.8;
+    scale: 0.93;
     margin-top: -5px;
+}
+
+.menufull img#micFull {
+    margin-top: -2px;
 }
 
 .menufull button:hover {
