@@ -5,6 +5,12 @@
     <title>Voz em Letras</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cutive&family=Dancing+Script:wght@700&family=Quicksand:wght@500&family=Qwitcher+Grypen:wght@700&display=swap"
+        rel="stylesheet">
+
     <style>
         @media screen and (max-width: 768px) {
             body {
@@ -41,6 +47,10 @@
                 align-items: center;
             }
 
+            div.opt {
+                width: 100%;
+            }
+
             .fullscreenButton {
                 display: none;
             }
@@ -49,22 +59,31 @@
                 text-align: left;
                 display: flex;
                 justify-content: left !important;
-                color: black;
+                color: white;
                 font-size: 0.8rem;
                 margin-left: 0px;
                 width: fit-content;
                 padding: 2px 8px 4px;
                 border-radius: 8px;
-                background-color: rgba(178, 183, 188, 0.801);
+                background-color: rgba(13, 35, 60, 0.801);
                 font-weight: 500;
             }
 
             .pfull {
-                color: black;
+                color: white;
                 display: flex;
                 justify-content: left !important;
                 top: -10px;
-                font-size: 1rem;
+                font-size: 1.3rem;
+            }
+
+            details p {
+                color: white;
+                display: flex;
+                justify-content: left;
+                position: relative;
+                top: -10px;
+
             }
 
             .details {
@@ -101,32 +120,37 @@
         </div>
         <div class="opt">
             <label for="fontSizeInput">TAMANHO DO TEXTO:</label>
-            <input type="number" id="fontSizeInput" value="50">
+            <input type="number" id="fontSizeInput" value="100">
             <label for="fontColorInput">COR DO TEXTO:</label>
             <input type="color" id="fontColorInput" value="#000000">
             <label for="fontFamilySelect">FONTE:</label>
             <select id="fontFamilySelect">
+                <option value="Quicksand, sans-serif">Padrão</option>
                 <option value="Arial, Helvetica, sans-serif">Arial</option>
                 <option value="Georgia, serif">Georgia</option>
-                <option value="Impact, Charcoal, sans-serif">Impact</option>
-                <option value="Verdana, Geneva, sans-serif">Verdana</option>
+                <option value="Cutive, serif">Cutive</option>
+                <option value="'Qwitcher Grypen', cursive">Cursiva</option>
+                <option value="Dancing Script, cursive">Dancing</option>
+
             </select>
-            <label for="backgroundColorInput">COR DO FUNDO:</label>
+            <label for="backgroundColorInput">COR DE FUNDO:</label>
             <input type="color" id="backgroundColorInput" value="#f0f8ff">
         </div>
         <div class="output" id="output">
             <div id="menufull" class="menufull ocultar">
                 <div class="opt ocultar">
                     <label for="fontSizeInput">Tamanho do Texto:</label>
-                    <input type="number" id="fontSizeInputFull" value="50">
+                    <input type="number" id="fontSizeInputFull" value="100">
                     <label for="fontColorInput">Cor do Texto:</label>
                     <input type="color" id="fontColorInputFull" value="#000000">
                     <label for="fontFamilySelect">Fonte:</label>
                     <select id="fontFamilySelectFull">
+                        <option value="Quicksand, sans-serif">Padrão</option>
                         <option value="Arial, Helvetica, sans-serif">Arial</option>
                         <option value="Georgia, serif">Georgia</option>
-                        <option value="Impact, Charcoal, sans-serif">Impact</option>
-                        <option value="Verdana, Geneva, sans-serif">Verdana</option>
+                        <option value="Cutive, serif">Cutive</option>
+                        <option value="'Qwitcher Grypen', cursive">Cursiva</option>
+                        <option value="Dancing Script, cursive">Dancing</option>
                     </select>
                     <label for="backgroundColorInput">Cor de Fundo:</label>
                     <input type="color" id="backgroundColorInputFull" value="#f0f8ff">

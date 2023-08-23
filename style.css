@@ -6,21 +6,23 @@
 
 
 body {
-    font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
+    font-family: 'Quicksand', sans-serif;
+
     background-image: url(images/fundo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 h1 {
-    margin-top: 5px;
+    margin-top: -20px;
+    margin-bottom: 2px;
     display: flex;
     justify-content: center;
     align-self: center;
     align-items: center;
     align-content: center;
-    font: 2rem;
-    font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
+    font-size: 8rem;
+    font-family: 'Qwitcher Grypen', cursive;
     color: #333030;
     text-shadow: 1px 1px 1px whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke;
 }
@@ -37,14 +39,15 @@ img {
 }
 
 button {
-    font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
-    background-color: rgba(178, 183, 188, 0.801);
+    font-family: 'Quicksand', sans-serif;
+    background-color: rgba(13, 35, 60, 0.801);
+    color: white;
     border: none;
     margin-bottom: 5px;
     border-radius: 8px;
     width: inherit;
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 1s0;
 }
 
 .menufull {
@@ -61,19 +64,22 @@ button {
 }
 
 .menufull button {
-    background-color: rgba(178, 183, 188, 0.801);
+    background-color: rgba(13, 35, 60, 0.801);
     text-align: center;
     justify-content: center;
     align-items: center;
     align-content: center;
     margin-right: 10px;
     padding: 3px 10px;
-    font-size: large;
+    font-size: 1.3rem;
     font-weight: 500;
+
+
 }
 
 .menufull .opt {
-    background-color: rgba(178, 183, 188, 0.801);
+    background-color: rgba(13, 35, 60, 0.801);
+    color: white;
     text-align: center;
     justify-content: space-around;
     align-items: center;
@@ -139,13 +145,14 @@ button {
 div.opt {
     display: flex;
     justify-content: space-around;
-    background-color: rgba(178, 183, 188, 0.801);
+    background-color: rgba(13, 35, 60, 0.801);
+    ;
     border: none;
     margin-bottom: 5px;
     border-radius: 8px;
     width: auto;
-    font-size: 1rem;
-    color: black;
+    font-size: 1.1rem;
+    color: white;
     padding: 5px;
     font-weight: 500;
 }
@@ -198,16 +205,17 @@ div.optFull {
     height: 100vh;
     z-index: 1;
     padding: 50px;
-    font-size: 4rem;
+    font-size: 7rem;
     color: #000;
 }
 
 p {
-    font-family: "Segoe UI", "Roboto", "Helvetica", sans-serif;
+    font-family: 'Quicksand', sans-serif;
     margin: 10px 0px;
     align-items: center;
     justify-content: center;
     display: flex;
+    font-size: 4rem
 }
 
 #top {
@@ -229,18 +237,34 @@ p {
 }
 
 input {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    width: 55px;
     border: none;
     border-radius: 8px;
     padding: 3px;
 }
 
+label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 select#fontFamilySelectFull {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder;
+    font-size: inherit;
     border-radius: 8px;
     padding: 3px;
 
 }
 
 select#fontFamilySelect {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder;
+    font-size: inherit;
     border-radius: 8px;
 }
 
@@ -264,22 +288,22 @@ details p {
     text-align: left;
     display: flex;
     justify-content: left !important;
-    color: black;
+    color: white;
     font-size: 0.8rem;
     margin-left: 0px;
     width: fit-content;
     padding: 2px 8px 4px;
     border-radius: 8px;
-    background-color: rgba(178, 183, 188, 0.801);
+    background-color: rgba(13, 35, 60, 0.801);
     font-weight: 500;
 }
 
 .pfull {
-    color: black;
+    color: white;
     display: flex;
     justify-content: left !important;
     top: -10px;
-    font-size: 1rem;
+    font-size: 1.3rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -299,6 +323,7 @@ details p {
     .head button {
         width: auto;
         margin-bottom: 10px;
+        padding: 5px 15px;
     }
 
     .output {
@@ -309,6 +334,10 @@ details p {
     .opt {
         flex-direction: column;
         align-items: center;
+    }
+
+    div.opt {
+        width: 100%;
     }
 
 }
