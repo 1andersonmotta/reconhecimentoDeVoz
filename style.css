@@ -32,10 +32,13 @@ img {
     justify-content: center;
     align-items: center;
     align-content: center;
-    padding: 0px 10px;
     size-adjust: auto;
     width: fit-content;
     height: fit-content;
+}
+
+img#mic {
+    margin-top: -15px;
 }
 
 button {
