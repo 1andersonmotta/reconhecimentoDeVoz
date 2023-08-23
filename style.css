@@ -47,7 +47,9 @@ button {
     border-radius: 8px;
     width: inherit;
     font-size: 1.5rem;
-    font-weight: 1s0;
+    font-weight: 100;
+    letter-spacing: 5px;
+
 }
 
 .menufull {
@@ -146,7 +148,6 @@ div.opt {
     display: flex;
     justify-content: space-around;
     background-color: rgba(13, 35, 60, 0.801);
-    ;
     border: none;
     margin-bottom: 5px;
     border-radius: 8px;
@@ -155,6 +156,7 @@ div.opt {
     color: white;
     padding: 5px;
     font-weight: 500;
+    letter-spacing: 1px;
 }
 
 div.optFull {
