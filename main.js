@@ -59,7 +59,7 @@ if (typeof SpeechRecognition === "undefined") {
         // Atualizar a transcrição exibida com o conteúdo anterior e o novo texto
         appendTextWithScroll(previousTranscript + interimTranscript);
     };
-
+    const icon = document.getElementById("icon");
     const mic = document.getElementById("mic")
     const micFull = document.getElementById("micFull")
     // Adicione o evento recognition.onend do reconhecimento de fala manual pelo botão
@@ -72,12 +72,14 @@ if (typeof SpeechRecognition === "undefined") {
             micFull.setAttribute("src", "images/micon.svg")
             mic.setAttribute("title", "Ouvindo..")
             micFull.setAttribute("title", "Ouvindo..")
+            icon.setAttribute("href", "images/micon.svg")
 
         } else {
             recognition.stop();
             isListening = false;
             mic.setAttribute("src", "images/micoff.svg")
             micFull.setAttribute("src", "images/micoff.svg")
+            icon.setAttribute("href", "images/micoff.svg")
             mic.setAttribute("title", "Parado")
             micFull.setAttribute("title", "Parado")
 
@@ -101,6 +103,7 @@ if (typeof SpeechRecognition === "undefined") {
             isListening = true;
             mic.setAttribute("src", "images/micon.svg")
             micFull.setAttribute("src", "images/micon.svg")
+            icon.setAttribute("href", "images/micon.svg")
             mic.setAttribute("title", "Ouvindo..")
             micFull.setAttribute("title", "Ouvindo..")
 
@@ -108,6 +111,7 @@ if (typeof SpeechRecognition === "undefined") {
             recognition.stop();
             isListening = false;
             mic.setAttribute("src", "images/micoff.svg")
+            icon.setAttribute("href", "images/micoff.svg")
             mic.setAttribute("title", "Parado")
             micFull.setAttribute("src", "images/micoff.svg")
             micFull.setAttribute("title", "Parado")
@@ -127,6 +131,7 @@ if (typeof SpeechRecognition === "undefined") {
             isListening = true;
             mic.setAttribute("src", "images/micon.svg")
             micFull.setAttribute("src", "images/micon.svg")
+            icon.setAttribute("href", "images/micon.svg")
             mic.setAttribute("title", "Ouvindo..")
             micFull.setAttribute("title", "Ouvindo..")
 
@@ -134,6 +139,7 @@ if (typeof SpeechRecognition === "undefined") {
             recognition.stop();
             isListening = false;
             mic.setAttribute("src", "images/micoff.svg")
+            icon.setAttribute("href", "images/micoff.svg")
             mic.setAttribute("title", "Parado")
             micFull.setAttribute("src", "images/micoff.svg")
             micFull.setAttribute("title", "Parado")
@@ -153,6 +159,7 @@ if (typeof SpeechRecognition === "undefined") {
             isListening = true;
             mic.setAttribute("src", "images/micon.svg")
             micFull.setAttribute("src", "images/micon.svg")
+            icon.setAttribute("href", "images/micon.svg")
             mic.setAttribute("title", "Ouvindo..")
             micFull.setAttribute("title", "Ouvindo..")
 
@@ -160,6 +167,7 @@ if (typeof SpeechRecognition === "undefined") {
             recognition.stop();
             isListening = false;
             mic.setAttribute("src", "images/micoff.svg")
+            icon.setAttribute("href", "images/micoff.svg")
             mic.setAttribute("title", "Parado")
             micFull.setAttribute("src", "images/micoff.svg")
             micFull.setAttribute("title", "Parado")
