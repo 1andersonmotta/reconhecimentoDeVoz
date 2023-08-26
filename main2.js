@@ -90,42 +90,6 @@ if (typeof SpeechRecognition === "undefined") {
 
 
 
-    document.getElementById("startButton").addEventListener("click", () => {
-        console.log(recognition.lang)
-        if (!isListening) {
-            finalTranscript = "";
-            recognition.start();
-            isListening = true;
-            mic.setAttribute("src", "images/micon.svg")
-            micFull.setAttribute("src", "images/micon.svg")
-            mic.setAttribute("title", "Ouvindo..")
-            micFull.setAttribute("title", "Ouvindo..")
-            icon.setAttribute("href", "images/micon.svg")
-            console.log("log", typeof (icon.href))
-            setInterval(() => {
-                if (icon.href == "http://localhost:5501/images/micon.svg") {
-                    return icon.setAttribute("href", "images/micon2.svg")
-                } else if (icon.href == "http://localhost:5501/images/micon2.svg") {
-                    icon.setAttribute("href", "images/micon.svg")
-                }
-            }, 500)
-
-        } else {
-            recognition.stop();
-            isListening = false;
-            mic.setAttribute("src", "images/micoff.svg")
-            micFull.setAttribute("src", "images/micoff.svg")
-            icon.setAttribute("href", "images/micoff.svg")
-            mic.setAttribute("title", "Parado")
-            micFull.setAttribute("title", "Parado")
-            if (!userStoppedSpeaking) {
-                finalTranscript += interimTranscript | '';
-                appendTextWithScroll(finalTranscript);
-            }
-            // userStoppedSpeaking = false; // Resete a variável para a próxima fala
-            interimTranscript = ""; // Limpar o texto intermediário
-        }
-    });
 
 
 
