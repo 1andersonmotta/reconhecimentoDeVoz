@@ -88,14 +88,7 @@ if (typeof SpeechRecognition === "undefined") {
     const micFull = document.getElementById("micFull")
     const config = document.getElementById("config")
 
-    config.addEventListener("click", () => {
-        const op = document.getElementById("op")
-        if (op.classList.value == "opt ocultaropt") {
-            op.classList.remove("ocultaropt")
-        } else {
-            op.classList.add("ocultaropt")
-        }
-    })
+
 
     document.getElementById("startButton").addEventListener("click", () => {
         console.log(recognition.lang)
