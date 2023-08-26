@@ -184,25 +184,6 @@ if (typeof SpeechRecognition === "undefined") {
     });
 
 
-    document.addEventListener("fullscreenchange", () => {
-        if (!document.fullscreenElement) {
-            menufull.classList.add("ocultar")
-            outputDiv.classList.remove("fullscreen");
-            isFullscreen = false;
-            scrollToBottom();
-        } else {
-            outputDiv.classList.add("fullscreen");
-            isFullscreen = true;
-        }
-    });
-
-    function applyTextSettings(fontSize, fontColor, fontFamily, backgroundColor) {
-        h1.style.fontSize = `${fontSize}px`;
-        h1.style.color = fontColor;
-        h1.style.fontFamily = fontFamily;
-        const mainDiv = document.querySelector(".main");
-        mainDiv.style.backgroundColor = backgroundColor;
-    }
 
     const fontSizeInput = document.getElementById("fontSizeInput");
     const fontColorInput = document.getElementById("fontColorInput");
