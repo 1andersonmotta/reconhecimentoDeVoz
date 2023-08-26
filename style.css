@@ -150,6 +150,10 @@ button {
     display: none;
 }
 
+.ocultaropt {
+    display: none !important;
+}
+
 div.opt {
     display: flex;
     justify-content: space-around;
@@ -158,11 +162,11 @@ div.opt {
     margin-bottom: 5px;
     border-radius: 8px;
     width: auto;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: white;
-    padding: 5px;
+    padding: 5px 3px;
     font-weight: 500;
-    letter-spacing: 1px;
+    letter-spacing: 0.3px;
 }
 
 div.optFull {
@@ -197,7 +201,7 @@ div.optFull {
     border: none;
     background-color: #f0f8ff;
     border-radius: 8px;
-    width: 900px;
+    width: 910px;
     padding: 10px;
     text-transform: uppercase;
     overflow-y: scroll;
@@ -263,13 +267,20 @@ label {
 select#fontFamilySelectFull {
     font-family: 'Quicksand', sans-serif;
     font-weight: bolder;
-    font-size: inherit;
+    font-size: inherit -1px;
     border-radius: 8px;
     padding: 3px;
 
 }
 
 select#fontFamilySelect {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder;
+    font-size: inherit;
+    border-radius: 8px;
+}
+
+select#languageSelect {
     font-family: 'Quicksand', sans-serif;
     font-weight: bolder;
     font-size: inherit;
@@ -345,10 +356,12 @@ details p {
     .opt {
         flex-direction: column;
         align-items: center;
+
     }
 
     div.opt {
         width: 100%;
+
     }
 
 }

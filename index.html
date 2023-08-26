@@ -123,8 +123,10 @@
             <button id="startButton" title="Iniciar ou Parar Transcrição">INICIAR </button>
             <img id="mic" src="images/micoff.svg" title="Parado" alt="">
             <button id="fullscreenButton" class="fullscreenButton" title="Colocar em Tela Cheia">TELA CHEIA</button>
+            <img id="config" src="images/setting.svg" title="Config" alt="">
+
         </div>
-        <div class="opt">
+        <div id="op" class="opt ocultaropt">
             <label for="fontSizeInput">TAMANHO DO TEXTO:</label>
             <input type="number" id="fontSizeInput" value="100">
             <label for="fontColorInput">COR DO TEXTO:</label>
@@ -138,6 +140,11 @@
                 <option value="'Qwitcher Grypen', cursive">Cursiva</option>
                 <option value="Dancing Script, cursive">Dancing</option>
 
+            </select>
+            <label for="languageSelect">IDIOMA:</label>
+            <select id="languageSelect">
+                <option value="pt-BR">Português</option>
+                <option value="en-US">Inglês</option>
             </select>
             <label for="backgroundColorInput">COR DE FUNDO:</label>
             <input type="color" id="backgroundColorInput" value="#f0f8ff">
@@ -186,7 +193,7 @@
         </details>
     </div>
 
-    <script src="main.js"></script>
+    <script src="main2.js"></script>
 
 </body>
 

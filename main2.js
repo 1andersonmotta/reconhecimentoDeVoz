@@ -6,6 +6,13 @@ if (typeof SpeechRecognition === "undefined") {
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = 'pt-BR';
+    //recognition.lang = 'en-US';
+
+    const language = document.getElementById("languageSelect");
+    language.addEventListener("change", () => {
+        console.log(language.value, typeof (language.value))
+        recognition.lang = language.value
+    })
     let finalTranscript = "";
     let isListening = false;
     let isFullscreen = false;
@@ -30,6 +37,7 @@ if (typeof SpeechRecognition === "undefined") {
 
     let userStoppedSpeaking = false;
 
+
     recognition.onresult = (event) => {
         let interimTranscript = "";
         let previousTranscript = finalTranscript;
@@ -50,11 +58,49 @@ if (typeof SpeechRecognition === "undefined") {
         appendTextWithScroll(previousTranscript + interimTranscript);
     };
 
+    recognition.onspeechstart = () => {
+        console.log("speech ok")
+    }
+    recognition.onresult = (event) => {
+        let interimTranscript = "";
+        let previousTranscript = finalTranscript;
+
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            const words = transcript.split(" ");
+            words.forEach((word) => {
+                if (!event.results[i].isFinal) {
+                    interimTranscript += word + " ";
+                } else {
+                    finalTranscript += word + " ";
+                    previousTranscript = finalTranscript;
+                    interimTranscript = "";
+                }
+            });
+        }
+        appendTextWithScroll(previousTranscript + interimTranscript);
+    };
+
+
+
     const icon = document.getElementById("icon");
     const mic = document.getElementById("mic")
     const micFull = document.getElementById("micFull")
+    const config = document.getElementById("config")
+
+    config.addEventListener("click", () => {
+        const op = document.getElementById("op")
+
+        console.log(op.classList.value)
+        if (op.classList.value == "opt ocultaropt") {
+            op.classList.remove("ocultaropt")
+        } else {
+            op.classList.add("ocultaropt")
+        }
+    })
 
     document.getElementById("startButton").addEventListener("click", () => {
+        console.log(recognition.lang)
         if (!isListening) {
             finalTranscript = "";
             recognition.start();
@@ -64,6 +110,15 @@ if (typeof SpeechRecognition === "undefined") {
             mic.setAttribute("title", "Ouvindo..")
             micFull.setAttribute("title", "Ouvindo..")
             icon.setAttribute("href", "images/micon.svg")
+            console.log("log", typeof (icon.href))
+            setInterval(() => {
+                if (icon.href == "http://localhost:5501/images/micon.svg") {
+                    return icon.setAttribute("href", "images/micon2.svg")
+                } else if (icon.href == "http://localhost:5501/images/micon2.svg") {
+                    icon.setAttribute("href", "images/micon.svg")
+                }
+            }, 500)
+
         } else {
             recognition.stop();
             isListening = false;
