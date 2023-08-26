@@ -35,35 +35,6 @@ if (typeof SpeechRecognition === "undefined") {
         transcriptionDiv.scrollTop = transcriptionDiv.scrollHeight;
     }
 
-    let userStoppedSpeaking = false;
-
-
-    recognition.onresult = (event) => {
-        let interimTranscript = "";
-        let previousTranscript = finalTranscript;
-
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-            const transcript = event.results[i][0].transcript;
-            const words = transcript.split(" ");
-            words.forEach((word) => {
-                if (!event.results[i].isFinal) {
-                    interimTranscript += word + " ";
-                } else {
-                    finalTranscript += word + " ";
-                    previousTranscript = finalTranscript;
-                    interimTranscript = "";
-                }
-            });
-        }
-        appendTextWithScroll(previousTranscript + interimTranscript);
-    };
-
-
-
-
-
-
-
 
 
 
