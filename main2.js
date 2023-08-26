@@ -83,12 +83,6 @@ if (typeof SpeechRecognition === "undefined") {
 
 
 
-    const icon = document.getElementById("icon");
-    const mic = document.getElementById("mic")
-    const micFull = document.getElementById("micFull")
-    const config = document.getElementById("config")
-
-
 
 
 
