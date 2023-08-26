@@ -184,38 +184,6 @@ if (typeof SpeechRecognition === "undefined") {
     });
 
 
-    const fullscreenButton = document.getElementById("fullscreenButton");
-    const exitfullscreenButton = document.getElementById("exitfullscreenButton");
-    const outputDiv = document.getElementById("output");
-    const menufull = document.querySelector("#menufull")
-
-    fullscreenButton.addEventListener("click", () => {
-        if (outputDiv.classList.contains("fullscreen")) {
-            document.exitFullscreen();
-            menufull.classList.add("ocultar")
-        } else {
-            menufull.classList.remove("ocultar")
-            setTimeout(() => {
-                menufull.classList.add("ocultar")
-            }, 55000)
-            outputDiv.requestFullscreen().catch((err) => {
-                console.error(`Erro ao entrar no modo de tela inteira: ${err.message}`);
-            });
-        }
-    });
-
-    exitfullscreenButton.addEventListener("click", () => {
-        if (outputDiv.classList.contains("fullscreen")) {
-            document.exitFullscreen();
-            menufull.classList.add("ocultar")
-        } else {
-            menufull.classList.remove("ocultar")
-            outputDiv.requestFullscreen().catch((err) => {
-                console.error(`Erro ao entrar no modo de tela inteira: ${err.message}`);
-            });
-        }
-    });
-
     document.addEventListener("fullscreenchange", () => {
         if (!document.fullscreenElement) {
             menufull.classList.add("ocultar")
