@@ -183,62 +183,6 @@ if (typeof SpeechRecognition === "undefined") {
         }
     });
 
-
-
-    const fontSizeInput = document.getElementById("fontSizeInput");
-    const fontColorInput = document.getElementById("fontColorInput");
-    const fontFamilySelect = document.getElementById("fontFamilySelect");
-    const backgroundColorInput = document.getElementById("backgroundColorInput");
-
-    fontSizeInput.addEventListener("input", () => {
-        applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
-
-    });
-
-    fontColorInput.addEventListener("input", () => {
-        applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
-    });
-
-    fontFamilySelect.addEventListener("change", () => {
-        applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
-    });
-
-    backgroundColorInput.addEventListener("input", () => {
-        applyBackgroundSettings(backgroundColorInput.value);
-    });
-
-    function applyBackgroundSettings(backgroundColor) {
-        const mainDiv = document.querySelector(".output");
-        mainDiv.style.backgroundColor = backgroundColor;
-    }
-
-    const fontSizeInputFull = document.getElementById("fontSizeInputFull");
-    const fontColorInputFull = document.getElementById("fontColorInputFull");
-    const fontFamilySelectFull = document.getElementById("fontFamilySelectFull");
-    const backgroundColorInputFull = document.getElementById("backgroundColorInputFull");
-
-    fontSizeInputFull.addEventListener("input", () => {
-        applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
-
-    });
-
-    fontColorInputFull.addEventListener("input", () => {
-        applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
-    });
-
-    fontFamilySelectFull.addEventListener("change", () => {
-        applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
-    });
-
-    backgroundColorInputFull.addEventListener("input", () => {
-        applyBackgroundSettingsFull(backgroundColorInputFull.value);
-    });
-
-    function applyBackgroundSettingsFull(backgroundColor) {
-        const mainDiv = document.querySelector(".output");
-        mainDiv.style.backgroundColor = backgroundColor;
-    }
-
     let timerId;
     const handleMouseMove = (evt) => {
         clearTimeout(timerId);
