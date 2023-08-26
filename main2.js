@@ -183,24 +183,7 @@ if (typeof SpeechRecognition === "undefined") {
         }
     });
 
-    let timerId;
-    const handleMouseMove = (evt) => {
-        clearTimeout(timerId);
 
-        if (!outputDiv.classList.contains("fullscreen")) {
-            menufull.classList.add("ocultar");
-        } else {
-            menufull.classList.remove("ocultar");
-            menufull.style.cursor = "pointer";
-        }
 
-        timerId = setTimeout(() => {
-            menufull.classList.add("ocultar");
-            menufull.style.cursor = "none";
-            outputDiv.addEventListener("mousemove", handleMouseMove);
-        }, 5000);
-    };
-
-    outputDiv.addEventListener("mousemove", handleMouseMove);
 
 }
