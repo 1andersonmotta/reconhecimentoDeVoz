@@ -130,58 +130,6 @@ if (typeof SpeechRecognition === "undefined") {
 
 
 
-    document.getElementById("micFull").addEventListener("click", (evt) => {
-        if (!isListening) {
-            finalTranscript = "";
-            recognition.start();
-            isListening = true;
-            mic.setAttribute("src", "images/micon.svg")
-            micFull.setAttribute("src", "images/micon.svg")
-            icon.setAttribute("href", "images/micon.svg")
-            mic.setAttribute("title", "Ouvindo..")
-            micFull.setAttribute("title", "Ouvindo..")
-
-        } else {
-            recognition.stop();
-            isListening = false;
-            mic.setAttribute("src", "images/micoff.svg")
-            icon.setAttribute("href", "images/micoff.svg")
-            mic.setAttribute("title", "Parado")
-            micFull.setAttribute("src", "images/micoff.svg")
-            micFull.setAttribute("title", "Parado")
-            if (!userStoppedSpeaking) {
-                finalTranscript += interimTranscript;
-                appendTextWithScroll(finalTranscript);
-            }
-            interimTranscript = "";
-        }
-    });
-    document.getElementById("mic").addEventListener("click", (evt) => {
-        if (!isListening) {
-            finalTranscript = "";
-            recognition.start();
-            isListening = true;
-            mic.setAttribute("src", "images/micon.svg")
-            micFull.setAttribute("src", "images/micon.svg")
-            icon.setAttribute("href", "images/micon.svg")
-            mic.setAttribute("title", "Ouvindo..")
-            micFull.setAttribute("title", "Ouvindo..")
-
-        } else {
-            recognition.stop();
-            isListening = false;
-            mic.setAttribute("src", "images/micoff.svg")
-            icon.setAttribute("href", "images/micoff.svg")
-            mic.setAttribute("title", "Parado")
-            micFull.setAttribute("src", "images/micoff.svg")
-            micFull.setAttribute("title", "Parado")
-            if (!userStoppedSpeaking) {
-                finalTranscript += interimTranscript;
-                appendTextWithScroll(finalTranscript);
-            }
-            interimTranscript = "";
-        }
-    });
 
 
 
