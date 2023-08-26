@@ -3,66 +3,56 @@ if (typeof SpeechRecognition === "undefined") {
     alert("Este navegador não suporta o reconhecimento de fala. Tente em outro navegador.");
 } else {
     const recognition = new SpeechRecognition();
-    recognition.continuous = true; // Permite reconhecimento contínuo
-    recognition.interimResults = true; // Habilita resultados intermediários
-    recognition.lang = 'pt-BR'; // Define o idioma para português do Brasil
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'pt-BR';
     let finalTranscript = "";
     let isListening = false;
-    let isFullscreen = false; // Variável para controlar o estado de tela inteira
+    let isFullscreen = false;
 
     const transcriptionDiv = document.getElementById('output');
     const play = document.getElementById('play');
     const h1 = document.createElement('p');
-    // Função para adicionar texto à div com scroll para baixo
     function appendTextWithScroll(text) {
         h1.textContent = text;
         transcriptionDiv.insertBefore(h1, play);
-        if (!isFullscreen) { // Rolagem somente quando não estiver em tela inteira
+        if (!isFullscreen) {
             scrollToBottom();
         } else {
-            // Se estiver em tela cheia, reajusta a rolagem após 100ms para garantir que fique na parte de baixo
             setTimeout(scrollToBottom, 100);
         }
     }
 
-    // Função para rolar a div para baixo
     function scrollToBottom() {
         transcriptionDiv.scrollTop = transcriptionDiv.scrollHeight;
     }
 
 
-    // Variável para controlar se o usuário parou de falar manualmente
     let userStoppedSpeaking = false;
 
-    // Evento chamado quando a fala é detectada
     recognition.onresult = (event) => {
         let interimTranscript = "";
-        let previousTranscript = finalTranscript; // Armazenar o texto anterior da transcrição
+        let previousTranscript = finalTranscript;
 
         for (let i = event.resultIndex; i < event.results.length; i++) {
             const transcript = event.results[i][0].transcript;
-            // Exibir cada palavra individualmente
             const words = transcript.split(" ");
             words.forEach((word) => {
                 if (!event.results[i].isFinal) {
-                    // Se for resultado intermediário, atualizar o texto intermediário
                     interimTranscript += word + " ";
                 } else {
-                    // Se o resultado for final, adicionar o texto à transcrição final
                     finalTranscript += word + " ";
-                    previousTranscript = finalTranscript; // Atualizar o texto anterior
-                    interimTranscript = ""; // Limpar o texto intermediário
+                    previousTranscript = finalTranscript;
+                    interimTranscript = "";
                 }
             });
         }
 
-        // Atualizar a transcrição exibida com o conteúdo anterior e o novo texto
         appendTextWithScroll(previousTranscript + interimTranscript);
     };
     const icon = document.getElementById("icon");
     const mic = document.getElementById("mic")
     const micFull = document.getElementById("micFull")
-    // Adicione o evento recognition.onend do reconhecimento de fala manual pelo botão
     document.getElementById("startButton").addEventListener("click", () => {
         if (!isListening) {
             finalTranscript = "";
@@ -84,18 +74,15 @@ if (typeof SpeechRecognition === "undefined") {
             micFull.setAttribute("title", "Parado")
 
             if (!userStoppedSpeaking) {
-                // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
                 finalTranscript += interimTranscript;
                 appendTextWithScroll(finalTranscript);
             }
-            // userStoppedSpeaking = false; // Resete a variável para a próxima fala
-            interimTranscript = ""; // Limpar o texto intermediário
+            interimTranscript = "";
         }
     });
 
 
 
-    // Adicione o evento recognition.onend do reconhecimento de fala manual pelo botão no fullScreen
     document.getElementById("startButtonfullscreen").addEventListener("click", (evt) => {
         if (!isListening) {
             finalTranscript = "";
@@ -116,12 +103,11 @@ if (typeof SpeechRecognition === "undefined") {
             micFull.setAttribute("src", "images/micoff.svg")
             micFull.setAttribute("title", "Parado")
             if (!userStoppedSpeaking) {
-                // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
                 finalTranscript += interimTranscript;
                 appendTextWithScroll(finalTranscript);
             }
-            // userStoppedSpeaking = false; // Resete a variável para a próxima fala
-            interimTranscript = ""; // Limpar o texto intermediário
+
+            interimTranscript = "";
         }
     });
     document.getElementById("micFull").addEventListener("click", (evt) => {
@@ -144,12 +130,10 @@ if (typeof SpeechRecognition === "undefined") {
             micFull.setAttribute("src", "images/micoff.svg")
             micFull.setAttribute("title", "Parado")
             if (!userStoppedSpeaking) {
-                // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
                 finalTranscript += interimTranscript;
                 appendTextWithScroll(finalTranscript);
             }
-            // userStoppedSpeaking = false; // Resete a variável para a próxima fala
-            interimTranscript = ""; // Limpar o texto intermediário
+            interimTranscript = "";
         }
     });
     document.getElementById("mic").addEventListener("click", (evt) => {
@@ -172,20 +156,16 @@ if (typeof SpeechRecognition === "undefined") {
             micFull.setAttribute("src", "images/micoff.svg")
             micFull.setAttribute("title", "Parado")
             if (!userStoppedSpeaking) {
-                // Usuário não parou de falar manualmente, então adicionamos o texto intermediário
                 finalTranscript += interimTranscript;
                 appendTextWithScroll(finalTranscript);
             }
-            // userStoppedSpeaking = false; // Resete a variável para a próxima fala
-            interimTranscript = ""; // Limpar o texto intermediário
+            interimTranscript = "";
         }
     });
 
 
-    // Role para a parte inferior inicialmente
     scrollToBottom();
 
-    // Adicionar evento ao botão "Tela Inteira"
     const fullscreenButton = document.getElementById("fullscreenButton");
     const exitfullscreenButton = document.getElementById("exitfullscreenButton");
     const outputDiv = document.getElementById("output");
@@ -218,7 +198,7 @@ if (typeof SpeechRecognition === "undefined") {
         }
     });
 
-    // Adicionar evento para sair do modo de tela inteira quando o usuário pressionar a tecla Esc
+
     document.addEventListener("fullscreenchange", () => {
         if (!document.fullscreenElement) {
             menufull.classList.add("ocultar")
