@@ -184,8 +184,6 @@ if (typeof SpeechRecognition === "undefined") {
     });
 
 
-    // scrollToBottom();
-
     const fullscreenButton = document.getElementById("fullscreenButton");
     const exitfullscreenButton = document.getElementById("exitfullscreenButton");
     const outputDiv = document.getElementById("output");
