@@ -13,14 +13,35 @@ if (typeof SpeechRecognition === "undefined") {
     const transcriptionDiv = document.getElementById('output');
     const play = document.getElementById('play');
     const h1 = document.createElement('p');
-    function appendTextWithScroll(text) {
-        h1.textContent = text;
-        transcriptionDiv.insertBefore(h1, play);
-        if (!isFullscreen) {
-            scrollToBottom();
+
+    async function appendTextWithScroll(text) {
+        const langTo = document.getElementById("langTo");
+        const langFor = document.getElementById("langFor");
+
+        if (langTo.value == langFor.value) {
+
+            h1.textContent = text;
+            transcriptionDiv.insertBefore(h1, play);
+            if (!isFullscreen) {
+                scrollToBottom();
+            } else {
+                setTimeout(scrollToBottom, 100);
+            }
+
         } else {
-            setTimeout(scrollToBottom, 100);
+            const data = await loadTranslation(text, langTo.value, langFor.value)
+            h1.textContent = data;
+            transcriptionDiv.insertBefore(h1, play);
+            if (!isFullscreen) {
+                scrollToBottom();
+            } else {
+                setTimeout(scrollToBottom, 100);
+            }
         }
+
+
+
+
     }
 
     function scrollToBottom() {
@@ -30,7 +51,7 @@ if (typeof SpeechRecognition === "undefined") {
 
     let userStoppedSpeaking = false;
 
-    recognition.onresult = (event) => {
+    recognition.onresult = async (event) => {
         let interimTranscript = "";
         let previousTranscript = finalTranscript;
 
@@ -48,7 +69,7 @@ if (typeof SpeechRecognition === "undefined") {
             });
         }
 
-        appendTextWithScroll(previousTranscript + interimTranscript);
+        await appendTextWithScroll(previousTranscript + interimTranscript);
     };
     const icon = document.getElementById("icon");
     const mic = document.getElementById("mic")
@@ -293,4 +314,10 @@ if (typeof SpeechRecognition === "undefined") {
 
     outputDiv.addEventListener("mousemove", handleMouseMove);
 
+}
+
+async function loadTranslation(text, langTo, langFor) {
+    const res = await fetch(`https://api.mymemory.translated.net/get?q=${text}&langpair=${langTo}|${langFor}`
+    ).then((res) => res.json())
+    return res.responseData.translatedText
 }
