@@ -9,17 +9,14 @@ if (typeof SpeechRecognition === "undefined") {
     let finalTranscript = "";
     let isListening = false;
     let isFullscreen = false;
+    let langOut = 'pt-BR';
 
     const transcriptionDiv = document.getElementById('output');
     const play = document.getElementById('play');
     const h1 = document.createElement('p');
 
     async function appendTextWithScroll(text) {
-        const langTo = document.getElementById("langTo");
-        const langFor = document.getElementById("langFor");
-
-        if (langTo.value == langFor.value) {
-
+        if (recognition.lang == langOut) {
             h1.textContent = text;
             transcriptionDiv.insertBefore(h1, play);
             if (!isFullscreen) {
@@ -27,9 +24,8 @@ if (typeof SpeechRecognition === "undefined") {
             } else {
                 setTimeout(scrollToBottom, 100);
             }
-
         } else {
-            const data = await loadTranslation(text, langTo.value, langFor.value)
+            const data = await loadTranslation(text, recognition.lang, langOut)
             h1.textContent = data;
             transcriptionDiv.insertBefore(h1, play);
             if (!isFullscreen) {
@@ -39,15 +35,36 @@ if (typeof SpeechRecognition === "undefined") {
             }
         }
 
-
-
-
     }
 
     function scrollToBottom() {
         transcriptionDiv.scrollTop = transcriptionDiv.scrollHeight;
     }
 
+    function go() {
+        finalTranscript = "";
+        // recognition.start();
+        isListening = true;
+        icon.setAttribute("href", "images/micon.svg")
+        mic.setAttribute("src", "images/micon.svg")
+        mic.setAttribute("title", "Ouvindo..")
+        micFull.setAttribute("src", "images/micon.svg")
+        micFull.setAttribute("title", "Ouvindo..")
+        start.innerText = 'PAUSAR'
+        startFull.innerText = 'PAUSAR'
+    }
+
+    function pause() {
+        recognition.stop();
+        isListening = false;
+        icon.setAttribute("href", "images/micoff.svg")
+        mic.setAttribute("src", "images/micoff.svg")
+        mic.setAttribute("title", "Parado")
+        micFull.setAttribute("src", "images/micoff.svg")
+        micFull.setAttribute("title", "Parado")
+        start.innerText = 'INICIAR'
+        startFull.innerText = 'INICIAR'
+    }
 
     let userStoppedSpeaking = false;
 
@@ -68,88 +85,47 @@ if (typeof SpeechRecognition === "undefined") {
                 }
             });
         }
-
         await appendTextWithScroll(previousTranscript + interimTranscript);
     };
+
     const icon = document.getElementById("icon");
     const mic = document.getElementById("mic")
     const micFull = document.getElementById("micFull")
-    document.getElementById("startButton").addEventListener("click", () => {
+
+    const start = document.getElementById("startButton")
+    start.addEventListener("click", () => {
         if (!isListening) {
-            finalTranscript = "";
             recognition.start();
-            isListening = true;
-            mic.setAttribute("src", "images/micon.svg")
-            micFull.setAttribute("src", "images/micon.svg")
-            mic.setAttribute("title", "Ouvindo..")
-            micFull.setAttribute("title", "Ouvindo..")
-            icon.setAttribute("href", "images/micon.svg")
-
+            go();
         } else {
-            recognition.stop();
-            isListening = false;
-            mic.setAttribute("src", "images/micoff.svg")
-            micFull.setAttribute("src", "images/micoff.svg")
-            icon.setAttribute("href", "images/micoff.svg")
-            mic.setAttribute("title", "Parado")
-            micFull.setAttribute("title", "Parado")
-
-            if (!userStoppedSpeaking) {
-                finalTranscript += interimTranscript;
-                appendTextWithScroll(finalTranscript);
-            }
+            pause()
             interimTranscript = "";
         }
     });
 
-
-
-    document.getElementById("startButtonfullscreen").addEventListener("click", (evt) => {
+    const startFull = document.getElementById("startButtonfullscreen")
+    startFull.addEventListener("click", (evt) => {
         if (!isListening) {
-            finalTranscript = "";
             recognition.start();
-            isListening = true;
-            mic.setAttribute("src", "images/micon.svg")
-            micFull.setAttribute("src", "images/micon.svg")
-            icon.setAttribute("href", "images/micon.svg")
-            mic.setAttribute("title", "Ouvindo..")
-            micFull.setAttribute("title", "Ouvindo..")
-
+            go()
         } else {
-            recognition.stop();
-            isListening = false;
-            mic.setAttribute("src", "images/micoff.svg")
-            icon.setAttribute("href", "images/micoff.svg")
-            mic.setAttribute("title", "Parado")
-            micFull.setAttribute("src", "images/micoff.svg")
-            micFull.setAttribute("title", "Parado")
+            pause()
             if (!userStoppedSpeaking) {
                 finalTranscript += interimTranscript;
+                console.log('chegou startButtonfullscreen')
                 appendTextWithScroll(finalTranscript);
             }
 
             interimTranscript = "";
         }
     });
+
     document.getElementById("micFull").addEventListener("click", (evt) => {
         if (!isListening) {
-            finalTranscript = "";
             recognition.start();
-            isListening = true;
-            mic.setAttribute("src", "images/micon.svg")
-            micFull.setAttribute("src", "images/micon.svg")
-            icon.setAttribute("href", "images/micon.svg")
-            mic.setAttribute("title", "Ouvindo..")
-            micFull.setAttribute("title", "Ouvindo..")
-
+            go()
         } else {
-            recognition.stop();
-            isListening = false;
-            mic.setAttribute("src", "images/micoff.svg")
-            icon.setAttribute("href", "images/micoff.svg")
-            mic.setAttribute("title", "Parado")
-            micFull.setAttribute("src", "images/micoff.svg")
-            micFull.setAttribute("title", "Parado")
+            pause()
             if (!userStoppedSpeaking) {
                 finalTranscript += interimTranscript;
                 appendTextWithScroll(finalTranscript);
@@ -159,23 +135,10 @@ if (typeof SpeechRecognition === "undefined") {
     });
     document.getElementById("mic").addEventListener("click", (evt) => {
         if (!isListening) {
-            finalTranscript = "";
             recognition.start();
-            isListening = true;
-            mic.setAttribute("src", "images/micon.svg")
-            micFull.setAttribute("src", "images/micon.svg")
-            icon.setAttribute("href", "images/micon.svg")
-            mic.setAttribute("title", "Ouvindo..")
-            micFull.setAttribute("title", "Ouvindo..")
-
+            go()
         } else {
-            recognition.stop();
-            isListening = false;
-            mic.setAttribute("src", "images/micoff.svg")
-            icon.setAttribute("href", "images/micoff.svg")
-            mic.setAttribute("title", "Parado")
-            micFull.setAttribute("src", "images/micoff.svg")
-            micFull.setAttribute("title", "Parado")
+            pause()
             if (!userStoppedSpeaking) {
                 finalTranscript += interimTranscript;
                 appendTextWithScroll(finalTranscript);
@@ -244,17 +207,22 @@ if (typeof SpeechRecognition === "undefined") {
     const fontColorInput = document.getElementById("fontColorInput");
     const fontFamilySelect = document.getElementById("fontFamilySelect");
     const backgroundColorInput = document.getElementById("backgroundColorInput");
+    const langTo = document.getElementById("langTo");
+    const langFor = document.getElementById("langFor");
 
     fontSizeInput.addEventListener("input", () => {
+        fontSizeInputFull.value = fontSizeInput.value
         applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
 
     });
 
     fontColorInput.addEventListener("input", () => {
+        fontColorInputFull.value = fontColorInput.value
         applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
     });
 
     fontFamilySelect.addEventListener("change", () => {
+        fontFamilySelectFull.value = fontFamilySelect.value
         applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
     });
 
@@ -265,23 +233,48 @@ if (typeof SpeechRecognition === "undefined") {
     function applyBackgroundSettings(backgroundColor) {
         const mainDiv = document.querySelector(".output");
         mainDiv.style.backgroundColor = backgroundColor;
+        backgroundColorInputFull.value = backgroundColor;
     }
+
+    langTo.addEventListener("change", () => {
+        recognition.lang = langTo.value;
+        langToFull.value = langTo.value;
+    })
+    langFor.addEventListener("change", () => {
+        langForFull.value = langFor.value;
+        langOut = langFor.value
+    })
 
     const fontSizeInputFull = document.getElementById("fontSizeInputFull");
     const fontColorInputFull = document.getElementById("fontColorInputFull");
     const fontFamilySelectFull = document.getElementById("fontFamilySelectFull");
     const backgroundColorInputFull = document.getElementById("backgroundColorInputFull");
+    const langToFull = document.getElementById("langToFull");
+    const langForFull = document.getElementById("langForFull");
+
+    langToFull.addEventListener("change", () => {
+        langTo.value = langToFull.value
+        recognition.lang = langToFull.value;
+    })
+    langForFull.addEventListener("change", () => {
+        langFor.value = langForFull.value
+        langOut = langForFull.value
+
+    })
 
     fontSizeInputFull.addEventListener("input", () => {
+        fontSizeInput.value = fontSizeInputFull.value
         applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
 
     });
 
     fontColorInputFull.addEventListener("input", () => {
+        fontColorInput.value = fontColorInputFull.value
         applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
     });
 
     fontFamilySelectFull.addEventListener("change", () => {
+        fontFamilySelect.value = fontFamilySelectFull.value
         applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
     });
 
@@ -292,6 +285,7 @@ if (typeof SpeechRecognition === "undefined") {
     function applyBackgroundSettingsFull(backgroundColor) {
         const mainDiv = document.querySelector(".output");
         mainDiv.style.backgroundColor = backgroundColor;
+        backgroundColorInput.value = backgroundColor
     }
 
     let timerId;
