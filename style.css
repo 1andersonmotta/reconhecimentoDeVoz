@@ -237,7 +237,6 @@ p {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
 }
 
 .head button {
@@ -266,7 +265,6 @@ select#fontFamilySelectFull {
     font-size: inherit;
     border-radius: 8px;
     padding: 3px;
-
 }
 
 select#fontFamilySelect {
@@ -281,6 +279,7 @@ select#langTo {
     font-weight: bolder;
     font-size: inherit;
     border-radius: 8px;
+    padding: 2px;
 }
 
 select#langFor {
@@ -289,6 +288,7 @@ select#langFor {
     font-size: inherit;
     border-radius: 8px;
     justify-content: space-between;
+    padding: 2px;
 }
 
 select#langToFull {
@@ -296,6 +296,7 @@ select#langToFull {
     font-weight: bolder;
     font-size: inherit;
     border-radius: 8px;
+    padding: 2px;
 }
 
 select#langForFull {
@@ -304,12 +305,12 @@ select#langForFull {
     font-size: inherit;
     border-radius: 8px;
     justify-content: space-between;
+    padding: 2px;
 }
 
 .lang {
     justify-content: center !important;
     gap: 10px;
-    margin-right: 15px;
 }
 
 details {
