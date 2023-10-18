@@ -45,7 +45,6 @@ if (typeof SpeechRecognition === "undefined") {
 
     function go() {
         finalTranscript = "";
-        // recognition.start();
         isListening = true;
         icon.setAttribute("href", "images/micon.svg")
         mic.setAttribute("src", "images/micon.svg")
@@ -315,8 +314,3 @@ if (typeof SpeechRecognition === "undefined") {
 
 }
 
-// async function loadTranslation(text, langTo, langFor) {
-//     const res = await fetch(`https://api.mymemory.translated.net/get?q=${text}&langpair=${langTo}|${langFor}`
-//     ).then((res) => res.json())
-//     return res.responseData.translatedText
-// }
