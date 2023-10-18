@@ -1,3 +1,5 @@
+import loadTranslation from './translation.js';
+
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (typeof SpeechRecognition === "undefined") {
     alert("Este navegador não suporta o reconhecimento de fala. Tente em outro navegador.");
@@ -55,7 +57,6 @@ if (typeof SpeechRecognition === "undefined") {
     }
 
     function pause() {
-        recognition.stop();
         isListening = false;
         icon.setAttribute("href", "images/micoff.svg")
         mic.setAttribute("src", "images/micoff.svg")
@@ -98,6 +99,7 @@ if (typeof SpeechRecognition === "undefined") {
             recognition.start();
             go();
         } else {
+            recognition.stop();
             pause()
             interimTranscript = "";
         }
@@ -109,6 +111,7 @@ if (typeof SpeechRecognition === "undefined") {
             recognition.start();
             go()
         } else {
+            recognition.stop();
             pause()
             if (!userStoppedSpeaking) {
                 finalTranscript += interimTranscript;
@@ -125,6 +128,7 @@ if (typeof SpeechRecognition === "undefined") {
             recognition.start();
             go()
         } else {
+            recognition.stop();
             pause()
             if (!userStoppedSpeaking) {
                 finalTranscript += interimTranscript;
@@ -138,6 +142,7 @@ if (typeof SpeechRecognition === "undefined") {
             recognition.start();
             go()
         } else {
+            recognition.stop();
             pause()
             if (!userStoppedSpeaking) {
                 finalTranscript += interimTranscript;
@@ -310,8 +315,8 @@ if (typeof SpeechRecognition === "undefined") {
 
 }
 
-async function loadTranslation(text, langTo, langFor) {
-    const res = await fetch(`https://api.mymemory.translated.net/get?q=${text}&langpair=${langTo}|${langFor}`
-    ).then((res) => res.json())
-    return res.responseData.translatedText
-}
+// async function loadTranslation(text, langTo, langFor) {
+//     const res = await fetch(`https://api.mymemory.translated.net/get?q=${text}&langpair=${langTo}|${langFor}`
+//     ).then((res) => res.json())
+//     return res.responseData.translatedText
+// }
