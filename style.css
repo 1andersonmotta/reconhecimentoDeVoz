@@ -291,6 +291,21 @@ select#langFor {
     justify-content: space-between;
 }
 
+select#langToFull {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder;
+    font-size: inherit;
+    border-radius: 8px;
+}
+
+select#langForFull {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder;
+    font-size: inherit;
+    border-radius: 8px;
+    justify-content: space-between;
+}
+
 .lang {
     justify-content: center !important;
     gap: 10px;
