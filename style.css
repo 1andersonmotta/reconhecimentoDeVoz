@@ -7,7 +7,6 @@
 
 body {
     font-family: 'Quicksand', sans-serif;
-
     background-image: url(images/fundo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -52,7 +51,6 @@ button {
     font-size: 1.5rem;
     font-weight: 100;
     letter-spacing: 5px;
-
 }
 
 .menufull {
@@ -78,8 +76,6 @@ button {
     padding: 3px 10px;
     font-size: 1.3rem;
     font-weight: 500;
-
-
 }
 
 .menufull .opt {
@@ -328,7 +324,6 @@ details p {
     top: -10px;
     font-size: 1.3rem;
     width: 850px;
-
 }
 
 .detailsfull {
