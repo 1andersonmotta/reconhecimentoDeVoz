@@ -12,10 +12,13 @@ if (typeof SpeechRecognition === "undefined") {
     let isListening = false;
     let isFullscreen = false;
     let langOut = 'pt-BR';
-
     const transcriptionDiv = document.getElementById('output');
     const play = document.getElementById('play');
     const h1 = document.createElement('p');
+    const icon = document.getElementById("icon");
+    const mic = document.getElementById("mic");
+    const micFull = document.getElementById("micFull");
+    let userStoppedSpeaking = false;
 
     async function appendTextWithScroll(text) {
         if (recognition.lang == langOut) {
@@ -66,8 +69,6 @@ if (typeof SpeechRecognition === "undefined") {
         startFull.innerText = 'INICIAR'
     }
 
-    let userStoppedSpeaking = false;
-
     recognition.onresult = async (event) => {
         let interimTranscript = "";
         let previousTranscript = finalTranscript;
@@ -88,9 +89,6 @@ if (typeof SpeechRecognition === "undefined") {
         await appendTextWithScroll(previousTranscript + interimTranscript);
     };
 
-    const icon = document.getElementById("icon");
-    const mic = document.getElementById("mic")
-    const micFull = document.getElementById("micFull")
 
     const start = document.getElementById("startButton")
     start.addEventListener("click", () => {
@@ -114,7 +112,6 @@ if (typeof SpeechRecognition === "undefined") {
             pause()
             if (!userStoppedSpeaking) {
                 finalTranscript += interimTranscript;
-                console.log('chegou startButtonfullscreen')
                 appendTextWithScroll(finalTranscript);
             }
 
@@ -150,7 +147,6 @@ if (typeof SpeechRecognition === "undefined") {
             interimTranscript = "";
         }
     });
-
 
     scrollToBottom();
 
