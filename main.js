@@ -11,7 +11,7 @@ if (typeof SpeechRecognition === "undefined") {
     let finalTranscript = "";
     let isListening = false;
     let isFullscreen = false;
-    let langOut = 'pt-BR';
+    let lanrecut = 'pt-BR';
     const transcriptionDiv = document.getElementById('output');
     const play = document.getElementById('play');
     const h1 = document.createElement('p');
@@ -21,7 +21,7 @@ if (typeof SpeechRecognition === "undefined") {
     let userStoppedSpeaking = false;
 
     async function appendTextWithScroll(text) {
-        if (recognition.lang == langOut) {
+        if (recognition.lang == lanrecut) {
             h1.textContent = text;
             transcriptionDiv.insertBefore(h1, play);
             if (!isFullscreen) {
@@ -30,7 +30,7 @@ if (typeof SpeechRecognition === "undefined") {
                 setTimeout(scrollToBottom, 100);
             }
         } else {
-            const data = await loadTranslation(text, recognition.lang, langOut)
+            const data = await loadTranslation(text, recognition.lang, lanrecut)
             h1.textContent = data;
             transcriptionDiv.insertBefore(h1, play);
             if (!isFullscreen) {
@@ -46,7 +46,7 @@ if (typeof SpeechRecognition === "undefined") {
         transcriptionDiv.scrollTop = transcriptionDiv.scrollHeight;
     }
 
-    function go() {
+    function rec() {
         finalTranscript = "";
         isListening = true;
         icon.setAttribute("href", "images/micon.svg")
@@ -94,11 +94,10 @@ if (typeof SpeechRecognition === "undefined") {
     start.addEventListener("click", () => {
         if (!isListening) {
             recognition.start();
-            go();
+            rec();
         } else {
             recognition.stop();
             pause()
-            interimTranscript = "";
         }
     });
 
@@ -106,7 +105,7 @@ if (typeof SpeechRecognition === "undefined") {
     startFull.addEventListener("click", (evt) => {
         if (!isListening) {
             recognition.start();
-            go()
+            rec()
         } else {
             recognition.stop();
             pause()
@@ -122,7 +121,7 @@ if (typeof SpeechRecognition === "undefined") {
     document.getElementById("micFull").addEventListener("click", (evt) => {
         if (!isListening) {
             recognition.start();
-            go()
+            rec()
         } else {
             recognition.stop();
             pause()
@@ -136,7 +135,7 @@ if (typeof SpeechRecognition === "undefined") {
     document.getElementById("mic").addEventListener("click", (evt) => {
         if (!isListening) {
             recognition.start();
-            go()
+            rec()
         } else {
             recognition.stop();
             pause()
@@ -242,7 +241,7 @@ if (typeof SpeechRecognition === "undefined") {
     })
     langFor.addEventListener("change", () => {
         langForFull.value = langFor.value;
-        langOut = langFor.value
+        lanrecut = langFor.value
     })
 
     const fontSizeInputFull = document.getElementById("fontSizeInputFull");
@@ -258,8 +257,7 @@ if (typeof SpeechRecognition === "undefined") {
     })
     langForFull.addEventListener("change", () => {
         langFor.value = langForFull.value
-        langOut = langForFull.value
-
+        lanrecut = langForFull.value
     })
 
     fontSizeInputFull.addEventListener("input", () => {
