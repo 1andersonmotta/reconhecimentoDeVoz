@@ -6,7 +6,7 @@
 
 
 body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lora';
     background-image: url(images/fundo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -41,8 +41,8 @@ img#mic {
 }
 
 button {
-    font-family: 'Quicksand', sans-serif;
-    background-color: rgba(13, 35, 60, 0.801);
+    font-family: 'Lora';
+    background-color: rgba(9, 25, 43, 0.424);
     color: white;
     border: none;
     margin-bottom: 5px;
@@ -67,7 +67,7 @@ button {
 }
 
 .menufull button {
-    background-color: rgba(13, 35, 60, 0.801);
+    background-color: rgba(9, 25, 43, 0.424);
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -79,7 +79,7 @@ button {
 }
 
 .menufull .opt {
-    background-color: rgba(13, 35, 60, 0.801);
+    background-color: rgba(9, 25, 43, 0.424);
     color: white;
     text-align: center;
     justify-content: space-around;
@@ -144,12 +144,13 @@ button {
 
 .ocultar {
     display: none;
+
 }
 
 div.opt {
     display: flex;
     justify-content: space-around;
-    background-color: rgba(13, 35, 60, 0.801);
+    background-color: rgba(9, 25, 43, 0.424);
     border: none;
     margin-bottom: 5px;
     border-radius: 8px;
@@ -214,7 +215,7 @@ div.optFull {
 }
 
 p {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lora';
     margin: 10px 0px;
     align-items: center;
     justify-content: center;
@@ -241,7 +242,7 @@ p {
 }
 
 input {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lora';
     font-size: 1.2rem;
     font-weight: bolder;
     width: 55px;
@@ -257,7 +258,7 @@ label {
 }
 
 select#fontFamilySelectFull {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lora';
     font-weight: bolder;
     font-size: inherit;
     border-radius: 8px;
@@ -265,14 +266,14 @@ select#fontFamilySelectFull {
 }
 
 select#fontFamilySelect {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lora';
     font-weight: bolder;
     font-size: inherit;
     border-radius: 8px;
 }
 
 select#langTo {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lora';
     font-weight: bolder;
     font-size: inherit;
     border-radius: 8px;
@@ -280,7 +281,7 @@ select#langTo {
 }
 
 select#langFor {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lora';
     font-weight: bolder;
     font-size: inherit;
     border-radius: 8px;
@@ -289,7 +290,7 @@ select#langFor {
 }
 
 select#langToFull {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lora';
     font-weight: bolder;
     font-size: inherit;
     border-radius: 8px;
@@ -297,7 +298,7 @@ select#langToFull {
 }
 
 select#langForFull {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lora';
     font-weight: bolder;
     font-size: inherit;
     border-radius: 8px;
@@ -307,7 +308,7 @@ select#langForFull {
 
 .lang {
     justify-content: center !important;
-    gap: 10px;
+    gap: 40px;
 }
 
 details {
@@ -337,7 +338,7 @@ details p {
     width: fit-content;
     padding: 2px 8px 4px;
     border-radius: 8px;
-    background-color: rgba(13, 35, 60, 0.801);
+    background-color: rgba(9, 25, 43, 0.424);
     font-weight: 500;
 }
 
