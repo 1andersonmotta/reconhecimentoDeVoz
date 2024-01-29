@@ -39,7 +39,6 @@ if (typeof SpeechRecognition === "undefined") {
                 setTimeout(scrollToBottom, 100);
             }
         }
-
     }
 
     function scrollToBottom() {
@@ -113,7 +112,6 @@ if (typeof SpeechRecognition === "undefined") {
                 finalTranscript += interimTranscript;
                 appendTextWithScroll(finalTranscript);
             }
-
             interimTranscript = "";
         }
     });
@@ -263,7 +261,6 @@ if (typeof SpeechRecognition === "undefined") {
     fontSizeInputFull.addEventListener("input", () => {
         fontSizeInput.value = fontSizeInputFull.value
         applyTextSettings(fontSizeInputFull.value, fontColorInputFull.value, fontFamilySelectFull.value);
-
     });
 
     fontColorInputFull.addEventListener("input", () => {
