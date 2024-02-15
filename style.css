@@ -118,8 +118,6 @@ button {
     margin-right: 10px;
     padding: 0px 10px;
     cursor: pointer;
-    font-size: large;
-    font-weight: 500;
     box-shadow: 1px 1px 1px whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke, 0 0 1vw whitesmoke;
 }
 
