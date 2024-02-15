@@ -284,6 +284,7 @@ if (typeof SpeechRecognition === "undefined") {
     }
 
     const menu = document.getElementById("menu")
+    const body = document.getElementById("body")
     let timerId;
     const handleMouseMove = (evt) => {
         clearTimeout(timerId);
@@ -306,10 +307,12 @@ if (typeof SpeechRecognition === "undefined") {
             menu.classList.add("ocultar");
             menu.style.cursor = "none";
             outputDiv.addEventListener("mousemove", handleMouseMove);
+            body.addEventListener("mousemove", handleMouseMove);
         }, 5000);
     };
 
     outputDiv.addEventListener("mousemove", handleMouseMove);
+    body.addEventListener("mousemove", handleMouseMove);
 
 }
 
