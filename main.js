@@ -283,6 +283,7 @@ if (typeof SpeechRecognition === "undefined") {
         backgroundColorInput.value = backgroundColor
     }
 
+    const menu = document.getElementById("menu")
     let timerId;
     const handleMouseMove = (evt) => {
         clearTimeout(timerId);
@@ -294,9 +295,16 @@ if (typeof SpeechRecognition === "undefined") {
             menufull.style.cursor = "pointer";
         }
 
+        if (menu.classList.contains("ocultar")) {
+            menu.classList.remove("ocultar");
+            menu.style.cursor = "pointer";
+        }
+
         timerId = setTimeout(() => {
             menufull.classList.add("ocultar");
             menufull.style.cursor = "none";
+            menu.classList.add("ocultar");
+            menu.style.cursor = "none";
             outputDiv.addEventListener("mousemove", handleMouseMove);
         }, 5000);
     };
