@@ -111,8 +111,7 @@
     </style>
 </head>
 
-<body>
-
+<body id="body">
     <div id="top" class="top">
         <h1>Voz em Letras</h1>
     </div>
@@ -122,41 +121,45 @@
             <img id="mic" src="images/micoff.svg" title="Parado" alt="">
             <button id="fullscreenButton" class="fullscreenButton" title="Colocar em Tela Cheia">TELA CHEIA</button>
         </div>
-        <div class="opt">
-            <label for="fontSizeInput">TAMANHO DO TEXTO :</label>
-            <input type="number" id="fontSizeInput" value="100">
-            <label for="fontColorInput">COR DO TEXTO :</label>
-            <input type="color" id="fontColorInput" value="#000000">
-            <label for="fontFamilySelect">FONTE :</label>
-            <select id="fontFamilySelect">
-                <option value="Lora">Padrão</option>
-                <option value="Quicksand, sans-serif">Quicksand</option>
-                <option value="Arial, Helvetica, sans-serif">Arial</option>
-                <option value="Georgia, serif">Georgia</option>
-                <option value="Cutive, serif">Cutive</option>
-                <option value="'Qwitcher Grypen', cursive">Cursiva</option>
-                <option value="Dancing Script, cursive">Dancing</option>
-            </select>
-            <label for="backgroundColorInput">COR DO FUNDO :</label>
-            <input type="color" id="backgroundColorInput" value="#f0f8ff">
-        </div>
-        <div class="opt lang">
-            <label for="langTo">FALAR EM :</label>
-            <select id="langTo">
-                <option value="pt-BR">Português</option>
-                <option value="es-ES">Espanhol</option>
-                <option value="it-IT">Italiano</option>
-                <option value="ja-JP">Japonês</option>
-                <option value="en-GB">Inglês</option>
-            </select>
-            <label for="langFor">ESCREVER EM :</label>
-            <select id="langFor">
-                <option value="pt-BR">Português</option>
-                <option value="es-ES">Espanhol</option>
-                <option value="it-IT">Italiano</option>
-                <option value="ja-JP">Japonês</option>
-                <option value="en-GB">Inglês</option>
-            </select>
+        <div>
+            <div id="menu" class="menu ocultar">
+                <div class="opt " id="opt">
+                    <label for="fontSizeInput">TAMANHO DO TEXTO :</label>
+                    <input type="number" id="fontSizeInput" value="100">
+                    <label for="fontColorInput">COR DO TEXTO :</label>
+                    <input type="color" id="fontColorInput" value="#000000">
+                    <label for="fontFamilySelect">FONTE :</label>
+                    <select id="fontFamilySelect">
+                        <option value="Lora">Padrão</option>
+                        <option value="Quicksand, sans-serif">Quicksand</option>
+                        <option value="Arial, Helvetica, sans-serif">Arial</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="Cutive, serif">Cutive</option>
+                        <option value="'Qwitcher Grypen', cursive">Cursiva</option>
+                        <option value="Dancing Script, cursive">Dancing</option>
+                    </select>
+                    <label for="backgroundColorInput">COR DO FUNDO :</label>
+                    <input type="color" id="backgroundColorInput" value="#f0f8ff">
+                </div>
+                <div class="opt lang">
+                    <label for="langTo">FALAR EM :</label>
+                    <select id="langTo">
+                        <option value="pt-BR">Português</option>
+                        <option value="es-ES">Espanhol</option>
+                        <option value="it-IT">Italiano</option>
+                        <option value="ja-JP">Japonês</option>
+                        <option value="en-GB">Inglês</option>
+                    </select>
+                    <label for="langFor">ESCREVER EM :</label>
+                    <select id="langFor">
+                        <option value="pt-BR">Português</option>
+                        <option value="es-ES">Espanhol</option>
+                        <option value="it-IT">Italiano</option>
+                        <option value="ja-JP">Japonês</option>
+                        <option value="en-GB">Inglês</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="output" id="output">
             <div id="menufull" class="menufull ocultar">
