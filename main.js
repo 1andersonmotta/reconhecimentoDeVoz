@@ -291,21 +291,28 @@ if (typeof SpeechRecognition === "undefined") {
 
         if (!outputDiv.classList.contains("fullscreen")) {
             menufull.classList.add("ocultar");
+            outputDiv.style.marginTop = "0px";
+
         } else {
             menufull.classList.remove("ocultar");
             menufull.style.cursor = "pointer";
+
         }
 
         if (menu.classList.contains("ocultar")) {
             menu.classList.remove("ocultar");
             menu.style.cursor = "pointer";
+
         }
 
         timerId = setTimeout(() => {
+
             menufull.classList.add("ocultar");
             menufull.style.cursor = "none";
             menu.classList.add("ocultar");
             menu.style.cursor = "none";
+            outputDiv.style.marginTop = "-90px";
+
             outputDiv.addEventListener("mousemove", handleMouseMove);
             body.addEventListener("mousemove", handleMouseMove);
         }, 5000);
@@ -313,6 +320,8 @@ if (typeof SpeechRecognition === "undefined") {
 
     outputDiv.addEventListener("mousemove", handleMouseMove);
     body.addEventListener("mousemove", handleMouseMove);
+
+
 
 }
 
