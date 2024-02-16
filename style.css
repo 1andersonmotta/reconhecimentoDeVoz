@@ -67,7 +67,7 @@ button {
 }
 
 .menufull button {
-    background-color: rgba(9, 25, 43, 0.424);
+    background-color: rgba(9, 25, 43, 0.815);
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -79,7 +79,7 @@ button {
 }
 
 .menufull .opt {
-    background-color: rgba(9, 25, 43, 0.424);
+    background-color: rgba(9, 25, 43, 0.815);
     color: white;
     text-align: center;
     justify-content: space-around;
@@ -140,9 +140,15 @@ button {
     width: 100%;
 }
 
-.ocultar {
-    display: none;
 
+#menu,
+#menufull {
+    transition: opacity 0.7s ease-in-out;
+}
+
+.ocultar {
+    opacity: 0;
+    pointer-events: none;
 }
 
 div.opt {
@@ -336,7 +342,7 @@ details p {
     width: fit-content;
     padding: 2px 8px 4px;
     border-radius: 8px;
-    background-color: rgba(9, 25, 43, 0.424);
+    background-color: rgba(9, 25, 43, 0.815);
     font-weight: 500;
 }
 
