@@ -210,7 +210,6 @@ if (typeof SpeechRecognition === "undefined") {
     fontSizeInput.addEventListener("input", () => {
         fontSizeInputFull.value = fontSizeInput.value
         applyTextSettings(fontSizeInput.value, fontColorInput.value, fontFamilySelect.value);
-
     });
 
     fontColorInput.addEventListener("input", () => {
@@ -296,17 +295,14 @@ if (typeof SpeechRecognition === "undefined") {
         } else {
             menufull.classList.remove("ocultar");
             menufull.style.cursor = "pointer";
-
         }
 
         if (menu.classList.contains("ocultar")) {
             menu.classList.remove("ocultar");
             menu.style.cursor = "pointer";
-
         }
 
         timerId = setTimeout(() => {
-
             menufull.classList.add("ocultar");
             menufull.style.cursor = "none";
             menu.classList.add("ocultar");
