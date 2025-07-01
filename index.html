@@ -1,229 +1,316 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
-    <title>Voz em Letras</title>
+    <title>Voz em Letras - Reconhecimento de Fala Inteligente</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="Aplicação avançada de reconhecimento de fala com tradução em tempo real">
     <link id="icon" rel="shortcut icon" href="./images/micoff.svg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cutive&family=Dancing+Script:wght@700&family=Quicksand:wght@500&family=Qwitcher+Grypen:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cutive&family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;600&family=Qwitcher+Grypen:wght@700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --background-color: rgba(255, 255, 255, 0.95);
+            --surface-color: rgba(248, 250, 252, 0.9);
+            --border-radius: 12px;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         @media screen and (max-width: 768px) {
             body {
                 margin: 0px;
-                width: 96%;
+                padding: 10px;
+                width: calc(100% - 20px);
+            }
+
+            .container {
+                padding: 15px;
             }
 
             .main {
-                display: contents;
+                display: block;
             }
 
-            .head {
+            .header {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
 
             h1 {
                 text-align: center;
+                font-size: 3.5rem;
+                margin: 10px 0;
             }
 
-            .head button {
-                width: auto;
-                margin-bottom: 20px;
+            .control-btn {
+                width: 100% !important;
+                max-width: 280px;
+                margin-bottom: 10px;
             }
 
             .output {
                 width: 100%;
-                margin: 0px;
+                margin: 15px 0;
+                height: 60vh;
+                font-size: 2rem;
             }
 
-            .opt {
+            .controls-panel {
                 flex-direction: column;
-                align-items: center;
-                gap: 5px;
+                gap: 15px;
+                padding: 15px;
             }
 
-            div.opt {
+            .language-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .control-group {
+                min-width: unset;
                 width: 100%;
             }
 
-            .fullscreenButton {
-                display: none;
-            }
 
-            .detailsfull {
-                text-align: left;
-                display: flex;
-                justify-content: left !important;
-                color: white;
-                font-size: 0.8rem;
-                margin-left: 0px;
-                width: fit-content;
-                padding: 2px 8px 4px;
-                border-radius: 8px;
-                background-color: rgba(13, 35, 60, 0.801);
-                font-weight: 500;
-            }
+        }
 
-            .pfull {
-                color: white;
-                display: flex;
-                justify-content: left !important;
-                top: -10px;
-                font-size: 1.3rem;
-                width: 120%;
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 2.8rem;
             }
-
-            details p {
-                color: white;
-                display: flex;
-                justify-content: left;
-                position: unset;
-                top: -10px;
-                font-size: 1.3rem;
-                width: 850px;
+            
+            .output {
+                font-size: 1.5rem;
+                height: 50vh;
             }
-
-            .details {
-                display: flex;
-                justify-content: left;
-                color: white;
-                position: relative;
+            
+            .control-btn {
+                font-size: 1rem;
+                padding: 8px 16px;
             }
-
-            .pmain {
-                color: white;
-                display: flex;
-                justify-content: left;
-                position: relative;
-                top: -10px;
-            }
-
         }
     </style>
 </head>
 
 <body id="body">
-    <div id="top" class="top">
-        <h1>Voz em Letras</h1>
-    </div>
-    <div class="main" id="main">
-        <div class="head">
-            <button id="startButton" title="Iniciar ou Parar Transcrição">INICIAR </button>
-            <img id="mic" src="images/micoff.svg" title="Parado" alt="">
-            <button id="fullscreenButton" class="fullscreenButton" title="Colocar em Tela Cheia">TELA CHEIA</button>
-        </div>
-        <div>
-            <div id="menu" class="menu ocultar">
-                <div class="opt " id="opt">
-                    <label for="fontSizeInput">TAMANHO DO TEXTO :</label>
-                    <input type="number" id="fontSizeInput" value="100">
-                    <label for="fontColorInput">COR DO TEXTO :</label>
-                    <input type="color" id="fontColorInput" value="#000000">
-                    <label for="fontFamilySelect">FONTE :</label>
-                    <select id="fontFamilySelect">
-                        <option value="Lora">Padrão</option>
-                        <option value="Quicksand, sans-serif">Quicksand</option>
-                        <option value="Arial, Helvetica, sans-serif">Arial</option>
-                        <option value="Georgia, serif">Georgia</option>
-                        <option value="Cutive, serif">Cutive</option>
-                        <option value="'Qwitcher Grypen', cursive">Cursiva</option>
-                        <option value="Dancing Script, cursive">Dancing</option>
-                    </select>
-                    <label for="backgroundColorInput">COR DO FUNDO :</label>
-                    <input type="color" id="backgroundColorInput" value="#f0f8ff">
+    <div class="container">
+        <header class="header-section">
+            <h1><i class="fas fa-microphone-alt"></i> Voz em Letras</h1>
+            <p class="subtitle">Reconhecimento de fala inteligente com tradução em tempo real</p>
+        </header>
+
+        <main class="main" id="main">
+            <section class="header">
+                <button id="startButton" class="control-btn primary-btn" title="Iniciar ou Parar Transcrição">
+                    <i class="fas fa-play"></i> INICIAR
+                </button>
+                <div class="mic-container">
+                    <img id="mic" src="images/micoff.svg" title="Parado" alt="Microfone" class="mic-icon">
+                    <div class="status-indicator" id="statusIndicator"></div>
                 </div>
-                <div class="opt lang">
-                    <label for="langTo">FALAR EM :</label>
-                    <select id="langTo">
-                        <option value="pt-BR">Português</option>
-                        <option value="es-ES">Espanhol</option>
-                        <option value="it-IT">Italiano</option>
-                        <option value="ja-JP">Japonês</option>
-                        <option value="en-GB">Inglês</option>
-                    </select>
-                    <label for="langFor">ESCREVER EM :</label>
-                    <select id="langFor">
-                        <option value="pt-BR">Português</option>
-                        <option value="es-ES">Espanhol</option>
-                        <option value="it-IT">Italiano</option>
-                        <option value="ja-JP">Japonês</option>
-                        <option value="en-GB">Inglês</option>
-                    </select>
+                <button id="fullscreenButton" class="control-btn secondary-btn" title="Modo Tela Cheia">
+                    <i class="fas fa-expand"></i> TELA CHEIA
+                </button>
+            </section>
+
+            <section class="controls-wrapper">
+                <div id="menu" class="controls-panel fade-menu">
+                    <div class="control-group">
+                        <h3><i class="fas fa-font"></i> Personalização</h3>
+                        <div class="control-row">
+                            <label for="fontSizeInput"><i class="fas fa-text-height"></i> Tamanho:</label>
+                            <input type="range" id="fontSizeInput" min="50" max="200" value="100" class="range-input">
+                            <span id="fontSizeValue">100px</span>
+                        </div>
+                        <div class="control-row">
+                            <label for="fontColorInput"><i class="fas fa-palette"></i> Cor do Texto:</label>
+                            <input type="color" id="fontColorInput" value="#000000" class="color-input">
+                        </div>
+                        <div class="control-row">
+                            <label for="fontFamilySelect"><i class="fas fa-font"></i> Fonte:</label>
+                            <select id="fontFamilySelect" class="select-input">
+                                <option value="Inter">Inter (Moderna)</option>
+                                <option value="Lora">Lora (Padrão)</option>
+                                <option value="Quicksand, sans-serif">Quicksand</option>
+                                <option value="Arial, Helvetica, sans-serif">Arial</option>
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="Cutive, serif">Cutive</option>
+                                <option value="'Qwitcher Grypen', cursive">Cursiva</option>
+                                <option value="Dancing Script, cursive">Dancing Script</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                                <option value="'Times New Roman', serif">Times New Roman</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group language-section">
+                        <h3><i class="fas fa-globe"></i> Idiomas</h3>
+                        <div class="language-controls">
+                            <div class="language-group">
+                                <label for="langTo"><i class="fas fa-microphone"></i> Falar em:</label>
+                                <select id="langTo" class="select-input">
+                                    <option value="pt-BR">🇧🇷 Português (Brasil)</option>
+                                    <option value="pt-PT">🇵🇹 Português (Portugal)</option>
+                                    <option value="en-US">🇺🇸 Inglês (EUA)</option>
+                                    <option value="en-GB">🇬🇧 Inglês (Reino Unido)</option>
+                                    <option value="es-ES">🇪🇸 Espanhol (Espanha)</option>
+                                    <option value="es-MX">🇲🇽 Espanhol (México)</option>
+                                    <option value="es-AR">🇦🇷 Espanhol (Argentina)</option>
+                                    <option value="fr-FR">🇫🇷 Francês</option>
+                                    <option value="it-IT">🇮🇹 Italiano</option>
+                                    <option value="de-DE">🇩🇪 Alemão</option>
+                                    <option value="ru-RU">🇷🇺 Russo</option>
+                                    <option value="ja-JP">🇯🇵 Japonês</option>
+                                    <option value="ko-KR">🇰🇷 Coreano</option>
+                                    <option value="zh-CN">🇨🇳 Chinês (Simplificado)</option>
+                                    <option value="zh-TW">🇹🇼 Chinês (Tradicional)</option>
+                                    <option value="ar-SA">🇸🇦 Árabe</option>
+                                    <option value="hi-IN">🇮🇳 Hindi</option>
+                                    <option value="nl-NL">🇳🇱 Holandês</option>
+                                    <option value="sv-SE">🇸🇪 Sueco</option>
+                                    <option value="no-NO">🇳🇴 Norueguês</option>
+                                    <option value="da-DK">🇩🇰 Dinamarquês</option>
+                                    <option value="fi-FI">🇫🇮 Finlandês</option>
+                                    <option value="pl-PL">🇵🇱 Polonês</option>
+                                    <option value="tr-TR">🇹🇷 Turco</option>
+                                    <option value="th-TH">🇹🇭 Tailandês</option>
+                                    <option value="vi-VN">🇻🇳 Vietnamita</option>
+                                    <option value="he-IL">🇮🇱 Hebraico</option>
+                                    <option value="uk-UA">🇺🇦 Ucraniano</option>
+                                    <option value="cs-CZ">🇨🇿 Tcheco</option>
+                                    <option value="hu-HU">🇭🇺 Húngaro</option>
+                                    <option value="ro-RO">🇷🇴 Romeno</option>
+                                    <option value="bg-BG">🇧🇬 Búlgaro</option>
+                                    <option value="hr-HR">🇭🇷 Croata</option>
+                                    <option value="sk-SK">🇸🇰 Eslovaco</option>
+                                    <option value="sl-SI">🇸🇮 Esloveno</option>
+                                    <option value="et-EE">🇪🇪 Estoniano</option>
+                                    <option value="lv-LV">🇱🇻 Letão</option>
+                                    <option value="lt-LT">🇱🇹 Lituano</option>
+                                </select>
+                            </div>
+                            <div class="language-group">
+                                <label for="langFor"><i class="fas fa-keyboard"></i> Escrever em:</label>
+                                <select id="langFor" class="select-input">
+                                    <option value="pt-BR">🇧🇷 Português (Brasil)</option>
+                                    <option value="pt-PT">🇵🇹 Português (Portugal)</option>
+                                    <option value="en-US">🇺🇸 Inglês (EUA)</option>
+                                    <option value="en-GB">🇬🇧 Inglês (Reino Unido)</option>
+                                    <option value="es-ES">🇪🇸 Espanhol (Espanha)</option>
+                                    <option value="es-MX">🇲🇽 Espanhol (México)</option>
+                                    <option value="es-AR">🇦🇷 Espanhol (Argentina)</option>
+                                    <option value="fr-FR">🇫🇷 Francês</option>
+                                    <option value="it-IT">🇮🇹 Italiano</option>
+                                    <option value="de-DE">🇩🇪 Alemão</option>
+                                    <option value="ru-RU">🇷🇺 Russo</option>
+                                    <option value="ja-JP">🇯🇵 Japonês</option>
+                                    <option value="ko-KR">🇰🇷 Coreano</option>
+                                    <option value="zh-CN">🇨🇳 Chinês (Simplificado)</option>
+                                    <option value="zh-TW">🇹🇼 Chinês (Tradicional)</option>
+                                    <option value="ar-SA">🇸🇦 Árabe</option>
+                                    <option value="hi-IN">🇮🇳 Hindi</option>
+                                    <option value="nl-NL">🇳🇱 Holandês</option>
+                                    <option value="sv-SE">🇸🇪 Sueco</option>
+                                    <option value="no-NO">🇳🇴 Norueguês</option>
+                                    <option value="da-DK">🇩🇰 Dinamarquês</option>
+                                    <option value="fi-FI">🇫🇮 Finlandês</option>
+                                    <option value="pl-PL">🇵🇱 Polonês</option>
+                                    <option value="tr-TR">🇹🇷 Turco</option>
+                                    <option value="th-TH">🇹🇭 Tailandês</option>
+                                    <option value="vi-VN">🇻🇳 Vietnamita</option>
+                                    <option value="he-IL">🇮🇱 Hebraico</option>
+                                    <option value="uk-UA">🇺🇦 Ucraniano</option>
+                                    <option value="cs-CZ">🇨🇿 Tcheco</option>
+                                    <option value="hu-HU">🇭🇺 Húngaro</option>
+                                    <option value="ro-RO">🇷🇴 Romeno</option>
+                                    <option value="bg-BG">🇧🇬 Búlgaro</option>
+                                    <option value="hr-HR">🇭🇷 Croata</option>
+                                    <option value="sk-SK">🇸🇰 Eslovaco</option>
+                                    <option value="sl-SI">🇸🇮 Esloveno</option>
+                                    <option value="et-EE">🇪🇪 Estoniano</option>
+                                    <option value="lv-LV">🇱🇻 Letão</option>
+                                    <option value="lt-LT">🇱🇹 Lituano</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="output" id="output">
-            <div id="menufull" class="menufull ocultar">
-                <div class="opt ">
-                    <label for="fontSizeInput">TAMANHO DO TEXTO :</label>
-                    <input type="number" id="fontSizeInputFull" value="100">
-                    <label for="fontColorInput">COR DO TEXTO :</label>
-                    <input type="color" id="fontColorInputFull" value="#000000">
-                    <label for="fontFamilySelect">FONTE :</label>
-                    <select id="fontFamilySelectFull">
-                        <option value="Lora">Padrão</option>
-                        <option value="Quicksand, sans-serif">Quicksand</option>
-                        <option value="Arial, Helvetica, sans-serif">Arial</option>
-                        <option value="Georgia, serif">Georgia</option>
-                        <option value="Cutive, serif">Cutive</option>
-                        <option value="'Qwitcher Grypen', cursive">Cursiva</option>
-                        <option value="Dancing Script, cursive">Dancing</option>
-                    </select>
-                    <label for="backgroundColorInput">COR DO FUNDO :</label>
-                    <input type="color" id="backgroundColorInputFull" value="#f0f8ff">
+            </section>
+
+            <section class="output-section">
+                <div class="output-header">
+                    <h2><i class="fas fa-file-alt"></i> Transcrição</h2>
+                    <div class="output-actions">
+                        <button id="clearButton" class="action-btn" title="Limpar transcrição">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button id="copyButton" class="action-btn" title="Copiar texto">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button id="downloadButton" class="action-btn" title="Baixar como arquivo">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="opt lang">
-                    <label for="langTo">FALAR EM :</label>
-                    <select id="langToFull">
-                        <option value="pt-BR">Português</option>
-                        <option value="es-ES">Espanhol</option>
-                        <option value="it-IT">Italiano</option>
-                        <option value="ja-JP">Japonês</option>
-                        <option value="en-GB">Inglês</option>
-                    </select>
-                    <label for="langFor">ESCREVER EM :</label>
-                    <select id="langForFull">
-                        <option value="pt-BR">Portugues</option>
-                        <option value="es-ES">Espanhol</option>
-                        <option value="it-IT">Italiano</option>
-                        <option value="ja-JP">Japonês</option>
-                        <option value="en-GB">Inglês</option>
-                    </select>
+                <div class="output" id="output">
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-microphone-slash"></i>
+                        <p>Clique em "INICIAR" para começar a transcrição</p>
+                    </div>
                 </div>
-                <div class="btn">
-                    <button id="startButtonfullscreen" title="Iniciar ou Parar Transcrição">INICIAR</button>
-                    <img id="micFull" src="images/micoff.svg" title="Parado" alt="">
-                    <button id="exitfullscreenButton" title="Sair da Tela Cheia">SAIR TELA CHEIA</button>
+                
+                <div class="translation-output" id="translationOutput" style="display: none;">
+                    <h3><i class="fas fa-language"></i> Tradução</h3>
+                    <div class="translation-content"></div>
                 </div>
-                <details class="detailsfull">
-                    <summary>Observações</summary>
-                    <p class="pfull">Quando uma pausa na fala é grande, a aplicação para. É necessário PAUSAR e
-                        INICIAR novamente.<br>
-                        Aplicação ainda não está operacional em dispositivos móveis, como celulares e tablets.
-                    </p>
-                </details>
-            </div>
-        </div>
-        <details id="details" class="details">
-            <summary>Observações</summary>
-            <p class="pmain">Quando uma pausa na fala é grande, a aplicação para. É necessário PAUSAR e INICIAR
-                novamente.<br>
-                Aplicação ainda não está operacional em dispositivos móveis, como celulares e tablets.
-            </p>
-        </details>
+            </section>
+        </main>
+
+        <footer class="footer-section">
+            <details class="info-panel" id="details">
+                <summary><i class="fas fa-info-circle"></i> Informações e Observações</summary>
+                <div class="info-content">
+                    <p><strong>💡 Como usar:</strong></p>
+                    <ul>
+                        <li>Clique em "INICIAR" para começar a transcrição</li>
+                        <li>Permita o acesso ao microfone quando solicitado</li>
+                        <li>Fale de forma clara e pausada</li>
+                        <li>Use "PAUSAR" para interromper temporariamente</li>
+                        <li>Configure idiomas diferentes para tradução automática</li>
+                    </ul>
+                    <p><strong>⚙️ Personalização:</strong></p>
+                    <ul>
+                        <li>Ajuste o tamanho, cor e fonte do texto</li>
+                        <li>Configure idiomas diferentes para tradução automática</li>
+                        <li>Use o botão "TELA CHEIA" para visualização ampliada</li>
+                    </ul>
+                    <p><strong>⚠️ Observações importantes:</strong></p>
+                    <ul>
+                        <li>Pausas longas na fala podem interromper a transcrição</li>
+                        <li>É necessário pausar e reiniciar em caso de interrupção</li>
+                        <li>Funcionalidade limitada em dispositivos móveis</li>
+                        <li>Requer conexão com internet para tradução</li>
+                    </ul>
+                </div>
+            </details>
+        </footer>
     </div>
 
     <script type="module" src="main.js"></script>
-
 </body>
 
 </html>
