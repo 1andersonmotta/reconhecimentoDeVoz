@@ -12,14 +12,14 @@ class SpeechRecognitionApp {
         this.targetLanguage = 'en';
         this.manualStop = false; // Flag para controlar paradas manuais
         this.firstStart = true; // Flag para controlar notificação de início
-        
+
         // Cache de elementos DOM
         this.elements = {};
-        
+
         // Timer para auto-hide dos controles
         this.controlsTimer = null;
         this.controlsHideTimer = null;
-        
+
         // Inicialização
         this.init();
     }
@@ -38,29 +38,29 @@ class SpeechRecognitionApp {
             // Botões principais
             startBtn: document.getElementById('startButton'),
             fullscreenBtn: document.getElementById('fullscreenButton'),
-            
+
             // Seletores de idioma
             languageSelect: document.getElementById('langTo'),
             targetLanguageSelect: document.getElementById('langFor'),
-            
+
             // Área de saída
             output: document.getElementById('output'),
             translationOutput: document.getElementById('translationOutput'),
-            
+
             // Botões de ação
             clearBtn: document.getElementById('clearButton'),
             copyBtn: document.getElementById('copyButton'),
             downloadBtn: document.getElementById('downloadButton'),
-            
+
             // Controles de personalização
             fontSizeInput: document.getElementById('fontSizeInput'),
             fontColorInput: document.getElementById('fontColorInput'),
             fontFamilySelect: document.getElementById('fontFamilySelect'),
-            
+
             // Painéis
             controlPanel: document.querySelector('.controls-panel'),
             languagePanel: document.querySelector('.language-section'),
-            
+
             // Status
             statusIndicator: document.querySelector('.status-indicator'),
             micIcon: document.getElementById('mic')
@@ -77,26 +77,26 @@ class SpeechRecognitionApp {
                 this.startRecording();
             }
         });
-        
+
         // Botões de ação
         this.elements.clearBtn?.addEventListener('click', () => this.clearOutput());
         this.elements.copyBtn?.addEventListener('click', () => this.copyToClipboard());
         this.elements.downloadBtn?.addEventListener('click', () => this.downloadTranscript());
         this.elements.fullscreenBtn?.addEventListener('click', () => this.toggleFullscreen());
-        
+
         // Controles de personalização
         this.elements.fontSizeInput?.addEventListener('input', (e) => {
             this.updateFontSize(e.target.value);
         });
-        
+
         this.elements.fontColorInput?.addEventListener('change', (e) => {
             this.updateFontColor(e.target.value);
         });
-        
+
         this.elements.fontFamilySelect?.addEventListener('change', (e) => {
             this.updateFontFamily(e.target.value);
         });
-        
+
         // Seletores de idioma
         this.elements.languageSelect?.addEventListener('change', (e) => {
             this.currentLanguage = e.target.value;
@@ -108,7 +108,7 @@ class SpeechRecognitionApp {
                 setTimeout(() => this.startRecording(), 500);
             }
         });
-        
+
         this.elements.targetLanguageSelect?.addEventListener('change', (e) => {
             this.targetLanguage = e.target.value;
             this.syncSettings();
@@ -127,14 +127,14 @@ class SpeechRecognitionApp {
                     this.startRecording();
                 }
             }
-            
+
             // Ctrl + C para copiar
             if (e.ctrlKey && e.key === 'c' && !e.shiftKey) {
                 if (this.finalTranscript) {
                     this.copyToClipboard();
                 }
             }
-            
+
             // Ctrl + L para limpar
             if (e.ctrlKey && e.key === 'l') {
                 e.preventDefault();
@@ -178,13 +178,13 @@ class SpeechRecognitionApp {
     initializeRecognition() {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         this.recognition = new SpeechRecognition();
-        
+
         // Configurações para permitir pausas sem interromper
         this.recognition.continuous = true; // Sempre contínuo
         this.recognition.interimResults = true;
         this.recognition.lang = this.currentLanguage;
         this.recognition.maxAlternatives = 1;
-        
+
         this.recognition.onstart = () => {
             this.isRecording = true;
             this.updateUI();
@@ -194,15 +194,15 @@ class SpeechRecognitionApp {
                 this.firstStart = false;
             }
         };
-        
+
         this.recognition.onresult = (event) => {
             this.handleRecognitionResult(event);
         };
-        
+
         this.recognition.onerror = (event) => {
             this.handleRecognitionError(event);
         };
-        
+
         this.recognition.onend = () => {
             // Se ainda deveria estar gravando, reinicia automaticamente
             if (this.isRecording && !this.manualStop) {
@@ -227,22 +227,22 @@ class SpeechRecognitionApp {
     handleRecognitionResult(event) {
         let interimTranscript = '';
         let finalTranscript = '';
-        
+
         for (let i = event.resultIndex; i < event.results.length; i++) {
             const transcript = event.results[i][0].transcript;
-            
+
             if (event.results[i].isFinal) {
                 finalTranscript += transcript;
             } else {
                 interimTranscript += transcript;
             }
         }
-        
+
         this.finalTranscript += finalTranscript;
         this.interimTranscript = interimTranscript;
-        
+
         this.updateOutput();
-        
+
         if (finalTranscript && this.autoTranslate) {
             this.translateText(finalTranscript);
         }
@@ -251,7 +251,7 @@ class SpeechRecognitionApp {
     handleRecognitionError(event) {
         let errorMessage = 'Erro no reconhecimento de fala';
         let shouldRestart = false;
-        
+
         switch (event.error) {
             case 'no-speech':
                 // Não mostrar erro para "no-speech" - é normal durante pausas
@@ -278,7 +278,7 @@ class SpeechRecognitionApp {
                 errorMessage = `Erro: ${event.error}`;
                 shouldRestart = true;
         }
-        
+
         if (shouldRestart && this.isRecording && !this.manualStop) {
             // Tentar reiniciar após um pequeno delay
             setTimeout(() => {
@@ -302,16 +302,16 @@ class SpeechRecognitionApp {
 
     startRecording() {
         if (!this.checkBrowserSupport()) return;
-        
+
         if (this.isRecording) {
             this.showNotification('Já está gravando', 'warning');
             return;
         }
-        
+
         this.manualStop = false; // Reset da flag
         this.firstStart = true; // Permitir notificação para nova sessão
         this.initializeRecognition();
-        
+
         try {
             this.recognition.start();
         } catch (error) {
@@ -325,7 +325,7 @@ class SpeechRecognitionApp {
             this.showNotification('Não está gravando', 'warning');
             return;
         }
-        
+
         this.manualStop = true; // Indica que foi uma parada manual
         this.recognition.stop();
     }
@@ -334,9 +334,9 @@ class SpeechRecognitionApp {
         const fullText = this.finalTranscript + this.interimTranscript;
         const finalSpan = '<span class="final">' + this.finalTranscript + '</span>';
         const interimSpan = '<span class="interim" style="opacity: 0.7; font-style: italic;">' + this.interimTranscript + '</span>';
-        
+
         console.log('updateOutput called with text:', fullText);
-        
+
         // Atualizar saída
         if (this.elements.output) {
             if (fullText.trim()) {
@@ -348,14 +348,14 @@ class SpeechRecognitionApp {
                 if (emptyState) emptyState.style.display = 'block';
             }
         }
-        
+
         // Atualizar texto no modo tela cheia também
         this.updateFullscreenText();
     }
 
     async translateText(text) {
         if (!text.trim()) return;
-        
+
         try {
             const response = await fetch('/translate', {
                 method: 'POST',
@@ -368,7 +368,7 @@ class SpeechRecognitionApp {
                     to: this.getLanguageCode(this.targetLanguage)
                 })
             });
-            
+
             if (response.ok) {
                 const data = await response.json();
                 this.updateTranslationOutput(data.translation);
@@ -386,7 +386,7 @@ class SpeechRecognitionApp {
         const encodedText = encodeURIComponent(text);
         const fromLang = this.getLanguageCode(this.currentLanguage);
         const toLang = this.getLanguageCode(this.targetLanguage);
-        
+
         const translationHTML = `
             <div class="translation-fallback">
                 <p>Tradução automática não disponível. 
@@ -396,7 +396,7 @@ class SpeechRecognitionApp {
                 </a></p>
             </div>
         `;
-        
+
         this.updateTranslationOutput(translationHTML);
     }
 
@@ -404,7 +404,7 @@ class SpeechRecognitionApp {
         if (this.elements.translationOutput) {
             this.elements.translationOutput.innerHTML = translation;
         }
-        
+
         if (this.elements.fullscreenElements.translationOutput) {
             this.elements.fullscreenElements.translationOutput.innerHTML = translation;
         }
@@ -424,21 +424,21 @@ class SpeechRecognitionApp {
             'zh-CN': 'zh',
             'ru-RU': 'ru'
         };
-        
+
         return langMap[langCode] || langCode.split('-')[0];
     }
 
     clearOutput() {
         this.finalTranscript = '';
         this.interimTranscript = '';
-        
+
         // Limpar saída normal
         if (this.elements.output) {
             this.elements.output.innerHTML = '';
             const emptyState = document.getElementById('emptyState');
             if (emptyState) emptyState.style.display = 'block';
         }
-        
+
         // Limpar saída de tela cheia
         const fullscreenOutput = document.getElementById('outputfullscreen');
         if (fullscreenOutput) {
@@ -447,11 +447,11 @@ class SpeechRecognitionApp {
                 textContainer.innerHTML = 'Clique em "INICIAR" para começar a transcrição em tela cheia';
             }
         }
-        
+
         // Limpar traduções
         if (this.elements.translationOutput) this.elements.translationOutput.innerHTML = '';
         if (this.elements.fullscreenElements.translationOutput) this.elements.fullscreenElements.translationOutput.innerHTML = '';
-        
+
         this.showNotification('Saída limpa');
     }
 
@@ -460,7 +460,7 @@ class SpeechRecognitionApp {
             this.showNotification('Nada para copiar', 'warning');
             return;
         }
-        
+
         try {
             await navigator.clipboard.writeText(this.finalTranscript);
             this.showNotification('Texto copiado para a área de transferência');
@@ -479,14 +479,14 @@ class SpeechRecognitionApp {
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
-        
+
         try {
             document.execCommand('copy');
             this.showNotification('Texto copiado para a área de transferência');
         } catch (error) {
             this.showNotification('Erro ao copiar texto', 'error');
         }
-        
+
         document.body.removeChild(textArea);
     }
 
@@ -495,19 +495,19 @@ class SpeechRecognitionApp {
             this.showNotification('Nada para baixar', 'warning');
             return;
         }
-        
+
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         const filename = `transcricao-${timestamp}.txt`;
-        
+
         const content = `Transcrição de Fala\n` +
-                       `Data: ${new Date().toLocaleString('pt-BR')}\n` +
-                       `Idioma: ${this.currentLanguage}\n` +
-                       `\n--- TRANSCRIÇÃO ---\n\n` +
-                       `${this.finalTranscript}`;
-        
+            `Data: ${new Date().toLocaleString('pt-BR')}\n` +
+            `Idioma: ${this.currentLanguage}\n` +
+            `\n--- TRANSCRIÇÃO ---\n\n` +
+            `${this.finalTranscript}`;
+
         const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
-        
+
         const a = document.createElement('a');
         a.href = url;
         a.download = filename;
@@ -515,13 +515,13 @@ class SpeechRecognitionApp {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        
+
         this.showNotification('Arquivo baixado: ' + filename);
     }
 
     toggleFullscreen() {
         this.isFullscreen = !this.isFullscreen;
-        
+
         if (this.isFullscreen) {
             this.enterFullscreen();
         } else {
@@ -534,7 +534,7 @@ class SpeechRecognitionApp {
         const fullscreenDiv = document.createElement('div');
         fullscreenDiv.className = 'fullscreen-mode';
         fullscreenDiv.id = 'fullscreenMode';
-        
+
         // Configurações iniciais para tela cheia
         this.fullscreenSettings = {
             fontSize: 3, // rem
@@ -542,10 +542,10 @@ class SpeechRecognitionApp {
             textColor: '#ffffff',
             backgroundColor: '#000000'
         };
-        
+
         // Aplicar configurações de background
         fullscreenDiv.style.backgroundColor = this.fullscreenSettings.backgroundColor;
-        
+
         // Texto da transcrição
         const textDiv = document.createElement('div');
         textDiv.className = 'fullscreen-text';
@@ -554,7 +554,7 @@ class SpeechRecognitionApp {
         textDiv.style.fontSize = this.fullscreenSettings.fontSize + 'rem';
         textDiv.style.fontFamily = this.fullscreenSettings.fontFamily;
         textDiv.style.color = this.fullscreenSettings.textColor;
-        
+
         // Painel de configurações
         const settingsDiv = document.createElement('div');
         settingsDiv.className = 'fullscreen-settings';
@@ -590,12 +590,12 @@ class SpeechRecognitionApp {
                 <input type="color" id="fsBackgroundColor" value="${this.fullscreenSettings.backgroundColor}">
             </div>
         `;
-        
+
         // Controles de tela cheia
         const controlsDiv = document.createElement('div');
         controlsDiv.className = 'fullscreen-controls';
         controlsDiv.id = 'fullscreenControls';
-        
+
         const startBtn = document.createElement('button');
         startBtn.innerHTML = this.isRecording ? '<i class="fas fa-stop"></i> PARAR' : '<i class="fas fa-play"></i> INICIAR';
         startBtn.onclick = () => {
@@ -607,40 +607,40 @@ class SpeechRecognitionApp {
             }
             this.resetHideTimer();
         };
-        
+
         const micIcon = document.createElement('img');
         micIcon.src = this.isRecording ? 'images/micon.svg' : 'images/micoff.svg';
         micIcon.className = 'mic-icon';
         micIcon.id = 'fullscreenMic';
-        
+
         const exitBtn = document.createElement('button');
         exitBtn.innerHTML = '<i class="fas fa-times"></i> SAIR';
         exitBtn.onclick = () => this.exitFullscreen();
-        
+
         controlsDiv.appendChild(startBtn);
         controlsDiv.appendChild(micIcon);
         controlsDiv.appendChild(exitBtn);
-        
+
         fullscreenDiv.appendChild(textDiv);
         fullscreenDiv.appendChild(settingsDiv);
         fullscreenDiv.appendChild(controlsDiv);
-        
+
         document.body.appendChild(fullscreenDiv);
-        
+
         // Configurar event listeners das configurações
         this.setupFullscreenSettings();
-        
+
         // Configurar sistema de auto-hide
         this.setupAutoHideFullscreen();
-        
+
         // Esconder scroll
         document.body.style.overflow = 'hidden';
-        
+
         // Atualizar botão principal
         if (this.elements.fullscreenBtn) {
             this.elements.fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> SAIR TELA CHEIA';
         }
-        
+
         // Escutar ESC para sair
         this.handleEscKey = (e) => {
             if (e.key === 'Escape') {
@@ -658,7 +658,7 @@ class SpeechRecognitionApp {
         const backgroundColorInput = document.getElementById('fsBackgroundColor');
         const textDiv = document.getElementById('fullscreenText');
         const fullscreenDiv = document.getElementById('fullscreenMode');
-        
+
         // Event listener para tamanho do texto
         textSizeSlider?.addEventListener('input', (e) => {
             this.fullscreenSettings.fontSize = parseFloat(e.target.value);
@@ -666,28 +666,28 @@ class SpeechRecognitionApp {
             textDiv.style.fontSize = this.fullscreenSettings.fontSize + 'rem';
             this.resetHideTimer();
         });
-        
+
         // Event listener para fonte
         fontFamilySelect?.addEventListener('change', (e) => {
             this.fullscreenSettings.fontFamily = e.target.value;
             textDiv.style.fontFamily = this.fullscreenSettings.fontFamily;
             this.resetHideTimer();
         });
-        
+
         // Event listener para cor do texto
         textColorInput?.addEventListener('change', (e) => {
             this.fullscreenSettings.textColor = e.target.value;
             textDiv.style.color = this.fullscreenSettings.textColor;
             this.resetHideTimer();
         });
-        
+
         // Event listener para cor de fundo
         backgroundColorInput?.addEventListener('change', (e) => {
             this.fullscreenSettings.backgroundColor = e.target.value;
             fullscreenDiv.style.backgroundColor = this.fullscreenSettings.backgroundColor;
             this.resetHideTimer();
         });
-        
+
         // Definir valor inicial da fonte
         fontFamilySelect.value = this.fullscreenSettings.fontFamily;
     }
@@ -696,36 +696,36 @@ class SpeechRecognitionApp {
         const fullscreenDiv = document.getElementById('fullscreenMode');
         const controls = document.getElementById('fullscreenControls');
         const settings = document.getElementById('fullscreenSettings');
-        
+
         if (!fullscreenDiv) return;
-        
+
         this.fullscreenHideTimer = null;
-        
+
         // Função para mostrar controles
         const showControls = () => {
             fullscreenDiv.classList.add('show-cursor');
             controls?.classList.remove('hidden');
             settings?.classList.remove('hidden');
         };
-        
+
         // Função para esconder controles
         const hideControls = () => {
             fullscreenDiv.classList.remove('show-cursor');
             controls?.classList.add('hidden');
             settings?.classList.add('hidden');
         };
-        
+
         // Função para resetar timer
         this.resetHideTimer = () => {
             clearTimeout(this.fullscreenHideTimer);
             showControls();
             this.fullscreenHideTimer = setTimeout(hideControls, 3000);
         };
-        
+
         // Event listener para movimento do mouse
         fullscreenDiv.addEventListener('mousemove', this.resetHideTimer);
         fullscreenDiv.addEventListener('click', this.resetHideTimer);
-        
+
         // Iniciar timer
         this.resetHideTimer();
     }
@@ -736,27 +736,27 @@ class SpeechRecognitionApp {
             clearTimeout(this.fullscreenHideTimer);
             this.fullscreenHideTimer = null;
         }
-        
+
         // Remover elemento de tela cheia
         const fullscreenDiv = document.getElementById('fullscreenMode');
         if (fullscreenDiv) {
             fullscreenDiv.remove();
         }
-        
+
         // Restaurar scroll
         document.body.style.overflow = '';
-        
+
         // Atualizar botão principal
         if (this.elements.fullscreenBtn) {
             this.elements.fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> TELA CHEIA';
         }
-        
+
         // Remover listener do ESC
         if (this.handleEscKey) {
             document.removeEventListener('keydown', this.handleEscKey);
             this.handleEscKey = null;
         }
-        
+
         this.isFullscreen = false;
     }
 
@@ -765,15 +765,15 @@ class SpeechRecognitionApp {
         if (this.isFullscreen) {
             const fullscreenText = document.getElementById('fullscreenText');
             const fullscreenMic = document.getElementById('fullscreenMic');
-            
+
             if (fullscreenText) {
                 fullscreenText.textContent = this.finalTranscript || 'Aguardando fala...';
             }
-            
+
             if (fullscreenMic) {
                 fullscreenMic.src = this.isRecording ? 'images/micon.svg' : 'images/micoff.svg';
             }
-            
+
             // Atualizar botão de iniciar/parar
             const startBtn = document.querySelector('.fullscreen-controls button');
             if (startBtn) {
@@ -791,7 +791,7 @@ class SpeechRecognitionApp {
         const startBtn = this.elements.startBtn;
         const micIcon = this.elements.micIcon;
         const statusIndicator = this.elements.statusIndicator;
-        
+
         if (startBtn) {
             if (this.isRecording) {
                 startBtn.innerHTML = '<i class="fas fa-stop"></i> PARAR';
@@ -803,25 +803,25 @@ class SpeechRecognitionApp {
                 startBtn.title = 'Iniciar Transcrição';
             }
         }
-        
+
         // Atualizar ícone do microfone
         if (micIcon) {
             micIcon.src = this.isRecording ? './images/micon.svg' : './images/micoff.svg';
             micIcon.title = this.isRecording ? 'Gravando' : 'Parado';
         }
-        
+
         // Atualizar indicador de status
         if (statusIndicator) {
-            statusIndicator.className = 'status-indicator ' + 
+            statusIndicator.className = 'status-indicator ' +
                 (this.isRecording ? 'recording' : 'stopped');
         }
-        
+
         // Atualizar favicon
         const favicon = document.getElementById('icon');
         if (favicon) {
             favicon.href = this.isRecording ? './images/micon.svg' : './images/micoff.svg';
         }
-        
+
         // Atualizar também o modo tela cheia
         this.updateFullscreenText();
     }
@@ -832,19 +832,19 @@ class SpeechRecognitionApp {
         if (existingNotification) {
             existingNotification.remove();
         }
-        
+
         // Criar nova notificação
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
         notification.textContent = message;
-        
+
         document.body.appendChild(notification);
-        
+
         // Animar entrada
         setTimeout(() => {
             notification.classList.add('show');
         }, 100);
-        
+
         // Remover após 3 segundos
         setTimeout(() => {
             notification.classList.remove('show');
@@ -863,7 +863,7 @@ class SpeechRecognitionApp {
             autoTranslate: this.autoTranslate,
             continuous: this.elements.continuousCheck?.checked || false
         };
-        
+
         localStorage.setItem('speechRecognitionSettings', JSON.stringify(settings));
     }
 
@@ -872,11 +872,11 @@ class SpeechRecognitionApp {
             const savedSettings = localStorage.getItem('speechRecognitionSettings');
             if (savedSettings) {
                 const settings = JSON.parse(savedSettings);
-                
+
                 this.currentLanguage = settings.currentLanguage || 'pt-BR';
                 this.targetLanguage = settings.targetLanguage || 'en';
                 this.autoTranslate = settings.autoTranslate || false;
-                
+
                 // Aplicar configurações aos elementos
                 if (this.elements.languageSelect) {
                     this.elements.languageSelect.value = this.currentLanguage;
@@ -890,7 +890,7 @@ class SpeechRecognitionApp {
                 if (this.elements.continuousCheck) {
                     this.elements.continuousCheck.checked = settings.continuous || false;
                 }
-                
+
                 this.syncSettings();
             }
         } catch (error) {
@@ -904,7 +904,7 @@ class SpeechRecognitionApp {
         const fullscreenOutput = this.elements.fullscreenElements.output;
         const fontSizeValue = document.getElementById('fontSizeValue');
         const fontSizeValueFull = document.getElementById('fontSizeValueFull');
-        
+
         if (output) output.style.fontSize = `${value}px`;
         if (fullscreenOutput) {
             const textContainer = fullscreenOutput.querySelector('.fullscreen-text');
@@ -912,42 +912,42 @@ class SpeechRecognitionApp {
         }
         if (fontSizeValue) fontSizeValue.textContent = `${value}px`;
         if (fontSizeValueFull) fontSizeValueFull.textContent = `${value}px`;
-        
+
         // Sincronizar controles
         if (this.elements.fontSizeInput) this.elements.fontSizeInput.value = value;
         if (this.elements.fullscreenElements.fontSizeInput) this.elements.fullscreenElements.fontSizeInput.value = value;
     }
-    
+
     updateFontColor(color) {
         const output = this.elements.output;
         const fullscreenOutput = this.elements.fullscreenElements.output;
-        
+
         if (output) output.style.color = color;
         if (fullscreenOutput) {
             const textContainer = fullscreenOutput.querySelector('.fullscreen-text');
             if (textContainer) textContainer.style.color = color;
         }
-        
+
         // Sincronizar controles
         if (this.elements.fontColorInput) this.elements.fontColorInput.value = color;
         if (this.elements.fullscreenElements.fontColorInput) this.elements.fullscreenElements.fontColorInput.value = color;
     }
-    
+
     updateFontFamily(fontFamily) {
         const output = this.elements.output;
         const fullscreenOutput = this.elements.fullscreenElements.output;
-        
+
         if (output) output.style.fontFamily = fontFamily;
         if (fullscreenOutput) {
             const textContainer = fullscreenOutput.querySelector('.fullscreen-text');
             if (textContainer) textContainer.style.fontFamily = fontFamily;
         }
-        
+
         // Sincronizar controles
         if (this.elements.fontFamilySelect) this.elements.fontFamilySelect.value = fontFamily;
         if (this.elements.fullscreenElements.fontFamilySelect) this.elements.fullscreenElements.fontFamilySelect.value = fontFamily;
     }
-    
+
     updateBackgroundColor(color) {
         // Apenas disponível no modo tela cheia
         if (this.isFullscreen) {
@@ -967,7 +967,7 @@ class SpeechRecognitionApp {
             exitBtnFullscreen: document.getElementById('exitfullscreenButton'),
             mainContainer: document.querySelector('.container')
         };
-        
+
         Object.entries(elements).forEach(([name, element]) => {
             console.log(`${name}:`, element ? '✓ ENCONTRADO' : '✗ NÃO ENCONTRADO');
             if (element) {
@@ -978,13 +978,13 @@ class SpeechRecognitionApp {
                 console.log(`  - Z-index: ${element.style.zIndex || styles.zIndex}`);
             }
         });
-        
+
         console.log('Current fullscreen state:', this.isFullscreen);
         console.log('Body classes:', document.body.className);
         console.log('==========================================');
         return elements;
     }
-    
+
     // Método para forçar modo tela cheia (para debug)
     forceFullscreenMode() {
         console.log('Forcing fullscreen mode...');
@@ -992,7 +992,7 @@ class SpeechRecognitionApp {
         this.updateFullscreenUI();
         console.log('Fullscreen mode forced');
     }
-    
+
     // Método para sair forçadamente do modo tela cheia (para debug)
     forceExitFullscreen() {
         console.log('Forcing exit fullscreen...');
@@ -1005,12 +1005,12 @@ class SpeechRecognitionApp {
 // Inicializar aplicação quando DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
     window.speechApp = new SpeechRecognitionApp();
-    
+
     // Funções globais para debug (pode remover em produção)
     window.testFullscreen = () => window.speechApp.testFullscreenElements();
     window.forceFullscreen = () => window.speechApp.forceFullscreenMode();
     window.forceExit = () => window.speechApp.forceExitFullscreen();
-    
+
     console.log('Aplicação carregada. Comandos de debug disponíveis:');
     console.log('- testFullscreen(): Testar elementos de tela cheia');
     console.log('- forceFullscreen(): Forçar modo tela cheia');
